@@ -1,6 +1,6 @@
 * {margin: 0; box-sizing: border-box; transition: transform .2s ease; user-select: none;}
 /* Scrollbar styles */
-body {
+/* body {
     scrollbar-color: rgba(0, 0, 0, .5) rgba(0, 0, 0, 0);
     scrollbar-width: none;
 }
@@ -9,14 +9,15 @@ body::-webkit-scrollbar:vertical {width:6px;}
 body::-webkit-scrollbar-button:increment,body::-webkit-scrollbar-button {display: none;} 
 body::-webkit-scrollbar:horizontal {height: 10px;}
 body::-webkit-scrollbar-thumb {background-color: #adaaaa; border-radius: 20px;}
-body::-webkit-scrollbar-track {border-radius: 10px;}
+body::-webkit-scrollbar-track {border-radius: 10px;} */
 /* Scrollbar done */
+html, body {position: relative; max-width: 100%; overflow-x: hidden;}
 html {font-size: 62.5%; font-family: 'Inter', sans-serif; color: white;}
 .hamburger-menu {position: absolute; transform: translateX(-100vw); }
 .search-menu {position: absolute; transform:translateX(-100vw)}
 a {text-decoration: none; color: white;}
 button:active, img:active, h1:active, open-aside{transform: scale(1.2);}
-a:hover {
+nav.a:hover {
     color: rgb(238, 187, 93);
     transform: scale(1.2);
 }
@@ -24,6 +25,7 @@ button {
     border: none;
     outline: none;
     background-color: transparent;
+    z-index: 3;
 }
 img {width: calc(1.2em + .3vw); cursor: pointer;}
 body {
@@ -40,9 +42,9 @@ body {
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    overflow-x: hidden;
 }
 .renting {
+    position: absolute;
     justify-self: center;
     display: flex;
     justify-content: center;
@@ -54,6 +56,7 @@ body {
     background-color: rgb(23, 21, 20);
     font-size: calc(.8em + .2vw);
     font-weight: 500;
+    z-index: 3;
 }
 aside {
     grid-area: aside;
@@ -179,9 +182,7 @@ nav {
     transition: transform .4s ease;
 }
 .hamburger-menu--show {transform: translateX(0);}
-.hamburger-menu--close {transform: translateX(-100vw);}
 .search-menu--show {transform: translateX(0);}
-.search-menu--close {transform: translateX(100vw);}
 .centered-menu, .input__container {
     width: 100vw;
     height: 60vh;
@@ -225,13 +226,12 @@ nav {
         font-size: calc(.6em + .3vw);
     }
     img {width: calc(1em + .3vw);}
-    .hamburger-menu, .search-menu {height: 100vh;}
+    .hamburger-menu, .search-menu {height: 100%;}
     .menu-close{
         position: fixed;
         top: 3.5%;
     }
     .renting {
-        grid-area: renting;
         margin-left: 5%;
         justify-self: flex-start;
         width: 40%;
@@ -296,12 +296,64 @@ nav {
 }
 /* portrait */
 @media (min-width: 320px) and (orientation: portrait) {
+    /* Hidden gallery */
+    .gallery-hidden {
+        height: 100%;
+        width: 100%;
+        position: absolute;
+        display:none;
+        flex-direction: column;
+        padding-top: 11vh;
+        z-index: 2;
+        transform: translateY(100vh);
+        background: rgba( 23, 21, 20, 0.60 );
+        backdrop-filter: blur( 10.0px );
+        -webkit-backdrop-filter: blur( 10.0px );
+    }
+    .gallery-show {
+        display:initial;
+    }
+    .gallery-show--transition {
+        transform: translateY(0);
+        transition: transform .6s cubic-bezier(0.29, 1.1, 0.93, 0.85);
+    }
+    .gallery-houses-container {
+        display: flex;
+        flex-direction: column;
+        gap: 40px;
+        padding: 35px;
+    }
+    .gallery__houses {
+        position: relative;
+        height: 200px;
+        display: flex;
+        align-items: flex-end;
+        background-image: url(images/solitary-chalet-768min.jpg);
+        border-radius: 10px;
+        padding: 15px;
+        text-align: center;
+        overflow: hidden;
+    }
+    .gallery__houses:hover {transform: scale(1.1);}
+    .gallery__houses:hover .gallery__houses-description{
+        position: relative;
+        top: 0;
+    }
+    .gallery__houses-description {
+        position: absolute;
+        top: 100%;
+        transition: .4s ease;
+    }
+
+
+    /* end */
     body {
-        height: 100vh;
+        height: auto;
         grid-template-rows: 15vh 60vh 15vh 15vh 25vh;
         background-image: url(images/solitary-chalet-mobile-320min.jpg);
+        overflow: hidden;
     }
-    .search-menu {position: absolute; transform:translateX(100vw)}
+    .search-menu {position: absolute; transform:translateX(100vw);}
     .search-menu--show {transform: translateX(0);}
     .menu-close{
         position: fixed;
