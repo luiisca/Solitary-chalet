@@ -6,19 +6,15 @@
     --cuckoos-nest:rgb(236, 92, 92);
 }
 * {margin: 0; box-sizing: border-box; transition: transform .2s ease; user-select: none;}
-/* Scrollbar styles */
-/* body {
-    scrollbar-color: rgba(0, 0, 0, .5) rgba(0, 0, 0, 0);
-    scrollbar-width: none;
+
+html, body {
+    position: relative;
+    max-width: 100%; 
+    overflow-x: hidden;
 }
-body::-webkit-scrollbar {-webkit-appearance: none;}
-body::-webkit-scrollbar:vertical {width:6px;}
-body::-webkit-scrollbar-button:increment,body::-webkit-scrollbar-button {display: none;} 
-body::-webkit-scrollbar:horizontal {height: 10px;}
-body::-webkit-scrollbar-thumb {background-color: #adaaaa; border-radius: 20px;}
-body::-webkit-scrollbar-track {border-radius: 10px;} */
-/* Scrollbar done */
-html, body {position: relative; max-width: 100%; overflow-x: hidden;}
+.overflow-hidden {
+    overflow-y: hidden;
+}
 html {font-size: 62.5%; font-family: 'Inter', sans-serif; color: white;}
 .hamburger-menu {position: absolute; transform: translateX(-100vw); }
 .search-menu {position: absolute; transform:translateX(-100vw)}
@@ -81,6 +77,8 @@ aside {
     margin-left: 14%;
     align-self: center;
     font-weight: 600;
+    background-color: rgb(52, 50, 48);
+    padding: 3% 5% 4% 4%;
 }
 .product h1 {
     line-height: calc(.2em + .5vw);
@@ -101,7 +99,7 @@ aside {
 .product__invisible-text {
     position: absolute;
     top: calc(-22px - calc(.2em + .5vw));
-    left: -6%;
+    left: -2%;
     font-size: x-large;
     color: rgba(255, 255, 255, 0.322);
     transform: scale(1.4);
@@ -191,11 +189,13 @@ nav {
     backdrop-filter: blur( 7.0px );
     -webkit-backdrop-filter: blur( 10.0px );
     transition: transform .4s ease;
+    display: flex;
+    justify-content: center;
 }
 .hamburger-menu--show {transform: translateX(0);}
 .search-menu--show {transform: translateX(0);}
 .centered-menu, .input__container {
-    width: 100vw;
+    width: auto;
     height: 60vh;
     top: 20vh;
     position: sticky;
@@ -308,7 +308,7 @@ nav {
 @media (min-width: 320px) and (orientation: portrait) {
     /* Hidden gallery */
     .gallery-hidden {
-        height: 100%;
+        height: 100vh;
         width: 100%;
         position: absolute;
         display:none;
@@ -319,19 +319,23 @@ nav {
         background: rgba( 23, 21, 20, 0.60 );
         backdrop-filter: blur( 10.0px );
         -webkit-backdrop-filter: blur( 10.0px );
+        transition: transform .6s ease-in-out;
+        overscroll-behavior: contain;
+        overflow: scroll;
     }
     .gallery-show {
         display:initial;
     }
     .gallery-show--transition {
         transform: translateY(0);
-        transition: transform .6s cubic-bezier(0.29, 1.1, 0.93, 0.85);
+        transition: transform .6s ease-in-out;
     }
     .gallery-houses-container {
         display: flex;
         flex-direction: column;
         gap: 40px;
         padding: 35px;
+        /* overflow: scroll; */
     }
     .gallery__houses {
         position: relative;
@@ -344,13 +348,34 @@ nav {
         text-align: center;
         overflow: hidden;
     }
+
+    .gallery__houses--solitary-chalet {
+        background-image: url(images/solitary-chalet.webp);
+        background-size:cover;
+    }
+    .gallery__houses--corner-cottage {
+        background-image: url(images/cottage.jpg);
+        background-size: cover;
+    }
+    .gallery__houses--woodlands {
+        background-image: url(images/woodlands.jpg);
+        background-size: cover;
+    }
+    .gallery__houses--little-copse {
+        background-image: url(images/copse.jpg);
+        background-size: cover;
+    }
+    .gallery__houses--cuckoos-nest {
+        background-image: url(images/nest.jpg);
+        background-size: cover;
+    }
     .gallery__houses:hover {transform: scale(1.1);}
     .gallery__houses:hover .gallery__houses-description{
         position: relative;
         top: 0;
     }
     .gallery__houses-description {
-        position: absolute;
+        /* position: absolute; */
         top: 100%;
         transition: .4s ease;
     }
@@ -361,7 +386,6 @@ nav {
         height: auto;
         grid-template-rows: 15vh 60vh 15vh 15vh 25vh;
         background-image: url(images/solitary-chalet-mobile-320min.jpg);
-        overflow: hidden;
     }
     .search-menu {position: absolute; transform:translateX(100vw);}
     .search-menu--show {transform: translateX(0);}

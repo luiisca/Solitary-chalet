@@ -1,6 +1,9 @@
 "use strict";
+
+const html = document.querySelector("html");
 const learnMoreBtn = document.querySelector(".product__learn-more");
-//hamburger menu
+//hamburger menus
+const menus = document.querySelectorAll(".menu");
 const hamMenu = document.querySelector(".hamburger-menu");
 const hamButton = document.querySelector(".left-menu__menu-button");
 const hamBtnImg = document.querySelector(".left-menu__menu-img");
@@ -11,6 +14,7 @@ const searchBtnImg = document.querySelector(".left-menu__search-img");
 //gallery
 const storeName = document.querySelector(".renting");
 const gallery = document.querySelector(".nav__gallery");
+const galleryImgs = document.querySelectorAll(".gallery__houses");
 const hiddenGallery = document.querySelector(".gallery-hidden");
 
 //change DOM
@@ -30,10 +34,12 @@ const searchInput = document
   .querySelector("input");
 const playVideoBtn = document.querySelector(".play-video__icon");
 const nav = document.querySelector("nav");
+const housesOptions = document.querySelectorAll(".menu__houses");
 const cottageObject = {
+  elementClassName: ".corner-cottage",
   houseInvTitle: "Cottage",
   houseTitle: "Corner Cottage",
-  backgroundImage: "url(images/rowan-heuvel-bjej8BY1JYQ-unsplash.jpg)",
+  backgroundImage: "url(images/cottage.jpg)",
   houseDesc:
     "Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti explicabo aliquam corrupti quae saepe ullam error vitae esse eum consequatur! Ad consequuntur provident sint voluptas magni sapiente, porro nostrum. Esse.",
   houseDet1:
@@ -41,11 +47,13 @@ const cottageObject = {
   houseDet2:
     "Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti explicabo aliquam corrupti quae saepe ullam error vitae esse eum consequatur! Ad consequuntur provident sint voluptas magni sapiente, porro nostrum. Esse.",
   principalClr: "var(--corner-cottage)",
+  transpPrincipalClr: "rgba(74, 165, 226, 0.63)",
 };
 const woodlandsObject = {
+  elementClassName: ".woodlands",
   houseInvTitle: "Woodlands",
   houseTitle: "Woodlands",
-  backgroundImage: "url(images/scott-webb-1ddol8rgUH8-unsplash.jpg)",
+  backgroundImage: "url(images/woodlands.jpg)",
   houseDesc:
     "Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti explicabo aliquam corrupti quae saepe ullam error vitae esse eum consequatur! Ad consequuntur provident sint voluptas magni sapiente, porro nostrum. Esse.",
   houseDet1:
@@ -53,11 +61,13 @@ const woodlandsObject = {
   houseDet2:
     "Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti explicabo aliquam corrupti quae saepe ullam error vitae esse eum consequatur! Ad consequuntur provident sint voluptas magni sapiente, porro nostrum. Esse.",
   principalClr: "var(--woodlands)",
+  transpPrincipalClr: "rgba(240, 57, 169, 0.63)",
 };
 const copseObject = {
+  elementClassName: ".little-copse",
   houseInvTitle: "Copse",
   houseTitle: "Little Copse",
-  backgroundImage: "url(images/webaliser-_TPTXZd9mOo-unsplash.jpg)",
+  backgroundImage: "url(images/copse.jpg)",
   houseDesc:
     "Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti explicabo aliquam corrupti quae saepe ullam error vitae esse eum consequatur! Ad consequuntur provident sint voluptas magni sapiente, porro nostrum. Esse.",
   houseDet1:
@@ -65,11 +75,13 @@ const copseObject = {
   houseDet2:
     "Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti explicabo aliquam corrupti quae saepe ullam error vitae esse eum consequatur! Ad consequuntur provident sint voluptas magni sapiente, porro nostrum. Esse.",
   principalClr: "var(--little-copse)",
+  transpPrincipalClr: "rgba(107, 241, 163, 0.63)",
 };
 const nestObject = {
+  elementClassName: ".cuckoos-nest",
   houseInvTitle: "Nest",
-  houseTitle: `The Cuckoo’s Nest`,
-  backgroundImage: "url(images/luke-stackpoole-eWqOgJ-lfiI-unsplash.jpg)",
+  houseTitle: `Cuckoo’s Nest`,
+  backgroundImage: "url(images/nest.jpg)",
   houseDesc:
     "Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti explicabo aliquam corrupti quae saepe ullam error vitae esse eum consequatur! Ad consequuntur provident sint voluptas magni sapiente, porro nostrum. Esse.",
   houseDet1:
@@ -77,8 +89,10 @@ const nestObject = {
   houseDet2:
     "Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti explicabo aliquam corrupti quae saepe ullam error vitae esse eum consequatur! Ad consequuntur provident sint voluptas magni sapiente, porro nostrum. Esse.",
   principalClr: "var(--cuckoos-nest)",
+  transpPrincipalClr: "rgba(236, 92, 92, 0.63)",
 };
 const chaletObject = {
+  elementClassName: ".solitary-chalet",
   houseInvTitle: "Chalet",
   houseTitle: "Solitary Chalet",
   backgroundImage: "url(images/solitary-chalet-mobile-320min.jpg)",
@@ -89,15 +103,35 @@ const chaletObject = {
   houseDet2:
     "Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti explicabo aliquam corrupti quae saepe ullam error vitae esse eum consequatur! Ad consequuntur provident sint voluptas magni sapiente, porro nostrum. Esse.",
   principalClr: "var(--solitary-chalet)",
+  transpPrincipalClr: "rgba(250, 179, 49, 0.63)",
 };
 
-//functions
-const removeGallery = () => {
-  if (hiddenGallery.classList.contains("gallery-show")) {
-    hiddenGallery.classList.remove("gallery-show");
-    hiddenGallery.classList.remove("gallery-show--transition");
-  }
+//observer
+const menuObs = function (entries) {
+  //fc
+  const [entry] = entries;
+  const target = entry.target.closest(".menu");
+  storeName.addEventListener("click", () => {
+    target.classList.remove(target.classList[2]);
+    html.classList.remove("overflow-hidden");
+  });
 };
+
+const menusObserver = new IntersectionObserver(menuObs, {
+  root: null,
+  threshold: 0,
+});
+
+menusObserver.observe(housesContainer);
+menusObserver.observe(searchInput);
+menusObserver.observe(hiddenGallery);
+
+//FUNCTIONS
+const initial = () => {
+  chalet.style.color = "var(--solitary-chalet)";
+  invisibleTitle.style.color = "rgba(250, 179, 49, 0.63)";
+};
+initial();
 const removeMenus = (menu, className) => {
   if (menu.classList.contains(`${className}-menu--show`))
     menu.classList.remove(`${className}-menu--show`);
@@ -123,19 +157,20 @@ const changeColorHoverNav = (
   });
 };
 //change background color of video icon
-const changeVideoLogoColor = (color1, color2) => {
+const changeVideoLogoColor = (initialClr, changeClr) => {
   const changePlayColor = () => {
-    playVideoBtn.style.backgroundColor = color1;
+    //back to initial state
+    playVideoBtn.style.backgroundColor = initialClr;
     playVideoBtn.style.transform = "initial";
   };
   playVideoBtn.addEventListener("mousedown", () => {
-    playVideoBtn.style.backgroundColor = color2;
+    playVideoBtn.style.backgroundColor = changeClr;
     playVideoBtn.style.transform = "scale(1.4)";
     setTimeout(changePlayColor, 300);
   });
 };
-
-const changeToCornerCottage = ({
+const changeToHouse = ({
+  elementClassName,
   houseInvTitle,
   houseTitle,
   backgroundImage,
@@ -143,6 +178,7 @@ const changeToCornerCottage = ({
   houseDet1,
   houseDet2,
   principalClr,
+  transpPrincipalClr,
 }) => {
   //convert into a template function which receives an object
   invisibleTitle.textContent = houseInvTitle;
@@ -152,10 +188,10 @@ const changeToCornerCottage = ({
   houseDetail1.textContent = houseDet1;
   houseDetail2.textContent = houseDet2;
   //colors
-  cottage.style.color = principalClr; //"var(--corner-cottage)";
-  searchInput.style.backgroundColor = "rgb(74, 165, 226, 0.63)";
-
-  // playVideoBtn.style.backgroundColor = "var(--corner-cottage)";
+  housesOptions.forEach((house) => (house.style.color = "white"));
+  document.querySelector(elementClassName).style.color = principalClr;
+  searchInput.style.backgroundColor = transpPrincipalClr;
+  invisibleTitle.style.color = transpPrincipalClr;
   changeColorHoverNav("mouseover", "mouseout", principalClr, "white");
   changeVideoLogoColor("rgb(52, 50, 48)", principalClr);
 };
@@ -166,22 +202,50 @@ function showHiddenMenus(e) {
   const searchTarget = e.target === searchBtn || e.target === searchBtnImg;
   if (hamTarget) {
     hamMenu.classList.toggle("hamburger-menu--show");
-    removeGallery();
+    removeGalleryFromOutsideHouses(e);
     removeMenus(searchMenu, "search");
+    hiddeMenus(hamMenu, "hamburger", "centered-menu");
   } else if (searchTarget) {
     searchMenu.classList.toggle("search-menu--show");
-    removeGallery();
+    removeGalleryFromOutsideHouses(e);
     removeMenus(hamMenu, "hamburger");
+    hiddeMenus(searchMenu, "search", "input-container");
   }
+  html.classList.toggle("overflow-hidden");
 }
 
+const removeGalleryFromOutsideHouses = function (e) {
+  //fc
+  if (!e.target.classList.contains("gallery__houses")) {
+    hiddenGallery.classList.remove("gallery-show");
+    hiddenGallery.classList.remove("gallery-show--transition");
+  }
+};
+
+const removeGalleryFromInsideHouses = function (e) {
+  console.log("hola", e.target);
+  if (e.target.classList.contains("gallery__houses")) {
+    hiddenGallery.classList.remove("gallery-show");
+    hiddenGallery.classList.remove("gallery-show--transition");
+  }
+};
+//hidde menus \
+const hiddeMenus = function (menu, menuClass, referClass) {
+  menu.addEventListener("click", function (e) {
+    if (!e.target.classList.contains(referClass)) {
+      removeMenus(menu, menuClass);
+      html.classList.toggle("overflow-hidden");
+    }
+  });
+};
+//EVENT LISTENERS
 //open gallery
 gallery.addEventListener("click", function () {
+  //fc
   hiddenGallery.classList.add("gallery-show");
   setTimeout(() => hiddenGallery.classList.add("gallery-show--transition"), 0);
 });
 
-//EVENT LISTENERS
 learnMoreBtn.addEventListener("click", (e) => {
   e.preventDefault();
   houseDetail1.scrollIntoView({ behavior: "smooth" });
@@ -189,21 +253,30 @@ learnMoreBtn.addEventListener("click", (e) => {
 //hamburger & search menu
 hamButton.addEventListener("click", showHiddenMenus);
 searchBtn.addEventListener("click", showHiddenMenus);
+//gallery
 
-//open gallery
-storeName.addEventListener("click", removeGallery);
-
+hiddenGallery.addEventListener("click", removeGalleryFromOutsideHouses);
 //change DOM
+const objectsMap = new Map([
+  [`chalet`, chaletObject],
+  [`woodlands`, woodlandsObject],
+  [`copse`, copseObject],
+  [`nest`, nestObject],
+  [`cottage`, cottageObject],
+]);
 housesContainer.addEventListener("click", (e) => {
-  const objectsMap = new Map([
-    [chalet, chaletObject],
-    [woodlands, woodlandsObject],
-    [copse, copseObject],
-    [nest, nestObject],
-    [cottage, cottageObject],
-  ]);
-  const targetObject = objectsMap.get(e.target);
+  const targetObject = objectsMap.get(e.target.dataset.house);
   if (e.target !== housesContainer) {
-    changeToCornerCottage(targetObject);
+    changeToHouse(targetObject);
+    removeMenus(hamMenu, "hamburger");
+    html.classList.toggle("overflow-hidden");
+  }
+});
+
+hiddenGallery.addEventListener("click", function (e) {
+  const targetObject = objectsMap.get(e.target.dataset.house);
+  if (e.target.classList.contains("gallery__houses")) {
+    changeToHouse(targetObject);
+    removeGalleryFromInsideHouses(e);
   }
 });

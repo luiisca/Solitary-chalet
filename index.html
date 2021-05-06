@@ -10,24 +10,30 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&family=Montserrat:wght@200&display=swap" rel="stylesheet">
 </head>
 <body>
-    <section class="gallery-hidden">
+    <div class="background"></div>
+    <section class="menu gallery-hidden">
         <section class="gallery-houses-container">
-            <a class="gallery__houses gallery__houses--corner-cottage">
+            <a class="gallery__houses gallery__houses--solitary-chalet" data-house= 'chalet'>
+                <article class="gallery__houses-description">
+                    <h2>Solitary Chalet</h2>
+                </article>
+            </a>
+            <a class="gallery__houses gallery__houses--corner-cottage" data-house= 'cottage'>
                 <article class="gallery__houses-description">
                     <h2>Corner Cottage</h2>
                 </article>
             </a>
-            <a class="gallery__houses gallery__houses--woodlands">
+            <a class="gallery__houses gallery__houses--woodlands" data-house= 'woodlands'>
                 <article class="gallery__houses-description">
                     <h2>Woodlands</h2>
                 </article>
             </a>
-            <a class="gallery__houses gallery__houses--little-copse">
+            <a class="gallery__houses gallery__houses--little-copse" data-house= 'copse'>
                 <article class="gallery__houses-description">
                     <h2>Little Copse</h2>
                 </article>
             </a>
-            <a class="gallery__houses gallery__houses--cuckoos-nest">
+            <a class="gallery__houses gallery__houses--cuckoos-nest" data-house= 'nest'>
                 <article class="gallery__houses-description ">
                     <h2>Cuckoos Nest</h2>
                 </article>
@@ -70,16 +76,16 @@
     </div>
     <div class="invisible-background"></div>
     <!-- Hidden panels  -->
-    <section class="hamburger-menu">
+    <section class="menu hamburger-menu">
         <div class="centered-menu">
-            <span><a class='solitary-chalet'>Solitary Chalet</a></span>
-            <span><a class='corner-cottage'>Corner Cottage</a></span>
-            <span><a class='woodlands'>Woodlands</a></span>
-            <span><a class='little-copse'>Little Copse</a></span>
-            <span><a class='cuckoos-nest'>The Cuckoo’s Nest</a></span>
+            <span><a class='menu__houses solitary-chalet' data-house= 'chalet'>Solitary Chalet</a></span>
+            <span><a class='menu__houses corner-cottage' data-house= 'cottage'>Corner Cottage</a></span>
+            <span><a class='menu__houses woodlands' data-house= 'woodlands'>Woodlands</a></span>
+            <span><a class='menu__houses little-copse' data-house= 'copse'>Little Copse</a></span>
+            <span><a class='menu__houses cuckoos-nest' data-house= 'nest'>The Cuckoo’s Nest</a></span>
         </div>
     </section>
-    <section class="search-menu">
+    <section class="menu search-menu">
         <div class="input__container">
             <p>What will your next home be?</p>
             <input type="text">
