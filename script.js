@@ -17,6 +17,12 @@ const gallery = document.querySelector(".nav__gallery");
 const galleryImgs = document.querySelectorAll(".gallery__houses");
 const hiddenGallery = document.querySelector(".gallery-hidden");
 
+//footer
+const footer = document.querySelector("footer");
+const leftLogo = document.querySelector(".media-icons--left-side");
+const rightLogo = document.querySelector(".media-icons--right-side");
+const navContainer = document.querySelector(".navContainer");
+
 //change DOM
 const invisibleTitle = document.querySelector(".product__invisible-text");
 const title = document.querySelector("h1");
@@ -47,7 +53,7 @@ const cottageObject = {
   houseDet2:
     "Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti explicabo aliquam corrupti quae saepe ullam error vitae esse eum consequatur! Ad consequuntur provident sint voluptas magni sapiente, porro nostrum. Esse.",
   principalClr: "var(--corner-cottage)",
-  transpPrincipalClr: "rgba(74, 165, 226, 0.63)",
+  transpPrincipalClr: "rgba(74, 165, 226, 0.53)",
 };
 const woodlandsObject = {
   elementClassName: ".woodlands",
@@ -61,7 +67,7 @@ const woodlandsObject = {
   houseDet2:
     "Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti explicabo aliquam corrupti quae saepe ullam error vitae esse eum consequatur! Ad consequuntur provident sint voluptas magni sapiente, porro nostrum. Esse.",
   principalClr: "var(--woodlands)",
-  transpPrincipalClr: "rgba(240, 57, 169, 0.63)",
+  transpPrincipalClr: "rgba(240, 57, 169, 0.53)",
 };
 const copseObject = {
   elementClassName: ".little-copse",
@@ -75,7 +81,7 @@ const copseObject = {
   houseDet2:
     "Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti explicabo aliquam corrupti quae saepe ullam error vitae esse eum consequatur! Ad consequuntur provident sint voluptas magni sapiente, porro nostrum. Esse.",
   principalClr: "var(--little-copse)",
-  transpPrincipalClr: "rgba(107, 241, 163, 0.63)",
+  transpPrincipalClr: "rgba(107, 241, 163, 0.53)",
 };
 const nestObject = {
   elementClassName: ".cuckoos-nest",
@@ -89,7 +95,7 @@ const nestObject = {
   houseDet2:
     "Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti explicabo aliquam corrupti quae saepe ullam error vitae esse eum consequatur! Ad consequuntur provident sint voluptas magni sapiente, porro nostrum. Esse.",
   principalClr: "var(--cuckoos-nest)",
-  transpPrincipalClr: "rgba(236, 92, 92, 0.63)",
+  transpPrincipalClr: "rgba(236, 92, 92, 0.53)",
 };
 const chaletObject = {
   elementClassName: ".solitary-chalet",
@@ -103,11 +109,12 @@ const chaletObject = {
   houseDet2:
     "Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti explicabo aliquam corrupti quae saepe ullam error vitae esse eum consequatur! Ad consequuntur provident sint voluptas magni sapiente, porro nostrum. Esse.",
   principalClr: "var(--solitary-chalet)",
-  transpPrincipalClr: "rgba(250, 179, 49, 0.63)",
+  transpPrincipalClr: "rgba(250, 179, 49, 0.53)",
 };
 
 //observer
 const menuObs = function (entries) {
+  //absolutely innecesary but good for practice
   //fc
   const [entry] = entries;
   const target = entry.target.closest(".menu");
@@ -129,7 +136,7 @@ menusObserver.observe(hiddenGallery);
 //FUNCTIONS
 const initial = () => {
   chalet.style.color = "var(--solitary-chalet)";
-  invisibleTitle.style.color = "rgba(250, 179, 49, 0.63)";
+  invisibleTitle.style.color = "rgba(250, 179, 49, 0.53)";
 };
 initial();
 const removeMenus = (menu, className) => {
@@ -201,17 +208,23 @@ function showHiddenMenus(e) {
   const hamTarget = e.target === hamButton || e.target === hamBtnImg;
   const searchTarget = e.target === searchBtn || e.target === searchBtnImg;
   if (hamTarget) {
-    hamMenu.classList.toggle("hamburger-menu--show");
-    removeGalleryFromOutsideHouses(e);
-    removeMenus(searchMenu, "search");
-    hiddeMenus(hamMenu, "hamburger", "centered-menu");
+    hiddenGallery.classList.add("gallery-show");
+    setTimeout(
+      () => hiddenGallery.classList.toggle("gallery-show--transition"),
+      0
+    );
+    // hamMenu.classList.toggle("hamburger-menu--show");
+    // removeGalleryFromOutsideHouses(e);
+    // removeMenus(searchMenu, "search");
+    // hiddeMenus(hamMenu, "hamburger", "centered-menu");
+    html.classList.toggle("overflow-hidden");
   } else if (searchTarget) {
     searchMenu.classList.toggle("search-menu--show");
     removeGalleryFromOutsideHouses(e);
     removeMenus(hamMenu, "hamburger");
     hiddeMenus(searchMenu, "search", "input-container");
+    html.classList.toggle("overflow-hidden");
   }
-  html.classList.toggle("overflow-hidden");
 }
 
 const removeGalleryFromOutsideHouses = function (e) {
@@ -280,3 +293,27 @@ hiddenGallery.addEventListener("click", function (e) {
     removeGalleryFromInsideHouses(e);
   }
 });
+
+//Media queries
+
+let mobLandscapeMediaQuery = window.matchMedia(
+  "(min-width: 560px) and (orientation: landscape)"
+);
+let mobPortraitMediaQuery = window.matchMedia(
+  "(min-width: 320px) and (orientation: portrait)"
+);
+
+console.log(mobLandscapeMediaQuery, mobPortraitMediaQuery);
+const joinLogosFooter = function () {
+  if (mobPortraitMediaQuery.matches) {
+    navContainer.append(leftLogo, rightLogo);
+    console.log(`portrait ${mobPortraitMediaQuery.matches}`);
+  } else if (mobLandscapeMediaQuery.matches) {
+    const logosContainer = document.createElement("div");
+    logosContainer.classList.add("logosContainer");
+    logosContainer.append(leftLogo, rightLogo);
+    footer.append(logosContainer);
+    console.log(`landscape ${mobLandscapeMediaQuery.matches}`);
+  }
+};
+joinLogosFooter();

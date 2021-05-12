@@ -1,434 +1,559 @@
 :root {
-    --solitary-chalet: rgb(250, 179, 49);
-    --corner-cottage:rgb(74, 165, 226); 
-    --woodlands:rgb(240, 57, 169);
-    --little-copse: rgb(107, 241, 163);
-    --cuckoos-nest:rgb(236, 92, 92);
+  --solitary-chalet: rgb(250, 179, 49);
+  --corner-cottage: rgb(74, 165, 226);
+  --woodlands: rgb(240, 57, 169);
+  --little-copse: rgb(107, 241, 163);
+  --cuckoos-nest: rgb(236, 92, 92);
 }
-* {margin: 0; box-sizing: border-box; transition: transform .2s ease; user-select: none;}
+* {
+  margin: 0;
+  box-sizing: border-box;
+  transition: transform 0.2s ease;
+  user-select: none;
+}
 
-html, body {
-    position: relative;
-    max-width: 100%; 
-    overflow-x: hidden;
+html,
+body {
+  position: relative;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 .overflow-hidden {
-    overflow-y: hidden;
+  overflow-y: hidden;
 }
-html {font-size: 62.5%; font-family: 'Inter', sans-serif; color: white;}
-.hamburger-menu {position: absolute; transform: translateX(-100vw); }
-.search-menu {position: absolute; transform:translateX(-100vw)}
-a {text-decoration: none; color: white;}
-button:active, img:active, h1:active, open-aside{transform: scale(1.2);}
+html {
+  font-size: 62.5%;
+  font-family: "Inter", sans-serif;
+  color: white;
+}
+.hamburger-menu {
+  position: absolute;
+  transform: translateX(-100vw);
+}
+.search-menu {
+  position: absolute;
+  transform: translateX(-100vw);
+}
+a {
+  text-decoration: none;
+  color: white;
+}
+button:active,
+img:active,
+h1:active,
+open-aside {
+  transform: scale(1.2);
+}
 nav a:hover {
-    transform: scale(1.2);
+  transform: scale(1.2);
 }
 button {
-    border: none;
-    outline: none;
-    background-color: transparent;
-    z-index: 3;
+  border: none;
+  outline: none;
+  background-color: transparent;
+  z-index: 3;
 }
-img {width: calc(1.2em + .3vw); cursor: pointer;}
+img {
+  width: calc(1.2em + 0.3vw);
+  cursor: pointer;
+}
 body {
-    height: 100vh;
-    display: grid;
-    grid-template: 15vh 60vh 30vh 30vh 25vh / repeat(3, 1fr);
-    grid-template-areas: 
-        "aside aside aside"
-        "product product play"
-        "details-left details-left details-left"
-        "details-right details-right details-right"
-        "icons-left nav icons-right";
-    background-image: url(images/solitary-chalet.webp);
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+  height: 100vh;
+  display: grid;
+  grid-template: 15vh 60vh 30vh 30vh 25vh / repeat(3, 1fr);
+  grid-template-areas:
+    "aside aside aside"
+    "product product play"
+    "details-left details-left details-left"
+    "details-right details-right details-right"
+    "icons-left nav icons-right";
+  background-image: url(images/solitary-chalet.webp);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 .renting {
-    position: absolute;
-    justify-self: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 120%;
-    height: 10vh;
-    grid-row: -1 / 1;
-    grid-column: 2 / 3;
-    background-color: rgb(23, 21, 20);
-    font-size: calc(.8em + .2vw);
-    font-weight: 500;
-    z-index: 3;
+  position: absolute;
+  justify-self: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 120%;
+  height: 10vh;
+  grid-row: -1 / 1;
+  grid-column: 2 / 3;
+  background-color: rgb(23, 21, 20);
+  font-size: calc(0.8em + 0.2vw);
+  font-weight: 500;
+  z-index: 3;
 }
 aside {
-    grid-area: aside;
-    display: flex;
-    justify-content: space-between;
-    height: 10vh;
-    padding-left: calc(100vw/7 - calc(1em + .3vw));
-    padding-right: calc(100vw/7 - calc(1em + .3vw));
+  grid-area: aside;
+  display: flex;
+  justify-content: space-between;
+  height: 10vh;
+  padding-left: calc(100vw / 7 - calc(1em + 0.3vw));
+  padding-right: calc(100vw / 7 - calc(1em + 0.3vw));
 }
 .product {
-    grid-area: product;
-    position: relative;
-    font-size: calc(.6em + .5vw);
-    width: 70%;
-    max-width: 250px;
-    margin-left: 14%;
-    align-self: center;
-    font-weight: 600;
-    background-color: rgb(52, 50, 48);
-    padding: 3% 5% 4% 4%;
+  grid-area: product;
+  position: relative;
+  font-size: calc(0.6em + 0.9vw);
+  width: 100%;
+  max-width: 250px;
+  margin-left: 14%;
+  align-self: center;
+  font-weight: 600;
+  background-color: rgb(52, 50, 48, 0.4);
+  padding: 3% 5% 4% 4%;
 }
 .product h1 {
-    line-height: calc(.2em + .5vw);
-    margin-bottom: 5%;
-    font-size: calc(2em + .5vw);
+  line-height: calc(0.2em + 0.5vw);
+  margin-bottom: 5%;
+  font-size: calc(2em + 0.5vw);
 }
 .product .product__description {
-    line-height: 145%;
-    margin-bottom: 10%;
-    font-weight: 300;
+  display: none;
+  line-height: 145%;
+  margin-bottom: 10%;
+  font-weight: 300;
 }
 .product .product__learn-more {
-    font-weight: 600;
+  font-weight: 600;
 }
 .product .product__learn-more a:active {
-    color: var(--solitary-chalet);
+  color: var(--solitary-chalet);
 }
 .product__invisible-text {
-    position: absolute;
-    top: calc(-22px - calc(.2em + .5vw));
-    left: -2%;
-    font-size: x-large;
-    color: rgba(255, 255, 255, 0.322);
-    transform: scale(1.4);
+  position: absolute;
+  top: calc(-22px - calc(0.2em + 0.5vw));
+  left: -2%;
+  font-size: xx-large;
+  color: rgba(255, 255, 255, 0.322);
+  transform: scale(1.4);
 }
 .play-video {
-    grid-area: play;
-    height: 26%;
-    margin: auto 0;
-    display: flex;
-    gap: 10%;
-    flex-direction: column;
-    align-items: center;
+  grid-area: play;
+  height: 26%;
+  margin: auto 0;
+  display: flex;
+  gap: 10%;
+  flex-direction: column;
+  align-items: center;
 }
-.play-video .play-video__icon{
-    width: 30px;
-    height: 30px;
-    background-color: rgb(52, 50, 48);
-    background-image: url(images/play-icon.png);
-    background-size: 40%;
-    background-repeat: no-repeat;
-    background-position: center;
-    border-radius: 50%;
-    transition: transform .3s cubic-bezier(1,-0.17, 0.41, 1.18);
+.play-video .play-video__icon {
+  width: 30px;
+  height: 30px;
+  background-color: rgb(52, 50, 48);
+  background-image: url(images/play-icon.png);
+  background-size: 40%;
+  background-repeat: no-repeat;
+  background-position: center;
+  border-radius: 50%;
+  transition: transform 0.3s cubic-bezier(1, -0.17, 0.41, 1.18);
 }
-.play-video p {font-size: calc(.5em + .9vw); font-weight: 600;}
+.play-video p {
+  font-size: calc(0.5em + 0.9vw);
+  font-weight: 600;
+}
 
 .house__details {
-    width: 90%;
-    height: 80%;
-    max-height: 120px;
-    padding: 5%;
-    display: flex;
-    align-items: center;
-    gap: 5%;
-    align-self: flex-end;
-    justify-self: center;
-    margin-bottom: 10%;
-    font-size: calc(.6em + .5vw);
-    font-weight: 200;
-    line-height: 180%;
-    background: rgba( 23, 21, 20, 0.60 );
-    backdrop-filter: blur( 10.0px );
-    -webkit-backdrop-filter: blur( 10.0px );
+  width: 90%;
+  height: 80%;
+  max-height: 120px;
+  padding: 5%;
+  display: flex;
+  align-items: center;
+  gap: 5%;
+  align-self: flex-end;
+  justify-self: center;
+  margin-bottom: 10%;
+  font-size: calc(0.6em + 0.5vw);
+  font-weight: 200;
+  line-height: 180%;
+  background: rgba(23, 21, 20, 0.6);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
-.house__details--left {grid-area: details-left;}
-.house__details--right {grid-area: details-right;}
-.play {grid-area: play;}
+.house__details--left {
+  grid-area: details-left;
+}
+.house__details--right {
+  grid-area: details-right;
+}
+.play {
+  grid-area: play;
+}
 .media-icons {
-    height: 40%;
-    display: flex;
-    gap: 2vh;
-    flex-direction: column;
-    justify-content: center;
-    align-self: center;
+  display: flex;
+  gap: 2vh;
+  flex-direction: column;
+  justify-content: center;
+  align-self: center;
 }
 .media-icons--left-side {
-    grid-area: icons-left;
-    justify-self: flex-end;
+  justify-self: flex-end;
+  z-index: 1;
+  order: 0;
 }
 nav {
-    grid-area: nav;
-    align-self: center;
-    justify-self: center;
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    gap: 1.5vh;
-    padding: 4%;
-    font-family: 'Montserrat', sans-serif;
-    font-size: calc(.7em + .3vw);
-    font-weight: 200;
-    color: rgb(233, 224, 224);
+  grid-area: nav;
+  align-self: center;
+  justify-self: center;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  gap: 1.5vh;
+  padding: 4%;
+  font-family: "Montserrat", sans-serif;
+  font-size: calc(0.7em + 0.3vw);
+  font-weight: 200;
+  color: rgb(233, 224, 224);
+  z-index: 1;
+  order: 1;
 }
-.media-icons--right-side {grid-area: icons-right;}
-.invisible-background {
-    width: 101%;
-    height: 25vh;
-    background-color: #171514;
-    grid-row: 5 / span 1;
-    grid-column: 1 / span 3;
-    z-index: -1;
+.media-icons--right-side {
+  justify-self: start;
+  z-index: 1;
+  order: 2;
 }
-.hamburger-menu, .search-menu {
-    width: 100%;
-    height: 130vh;
-    background: rgba( 0, 0, 0, 0.60 );
-    backdrop-filter: blur( 7.0px );
-    -webkit-backdrop-filter: blur( 10.0px );
-    transition: transform .4s ease;
-    display: flex;
-    justify-content: center;
+footer {
+  display: flex;
+  justify-content: center;
+  width: 101%;
+  height: 25vh;
+  background-color: #171514;
+  grid-row: 5 / span 1;
+  grid-column: 1 / span 3;
+  z-index: 0;
 }
-.hamburger-menu--show {transform: translateX(0);}
-.search-menu--show {transform: translateX(0);}
-.centered-menu, .input__container {
-    width: auto;
-    height: 60vh;
-    top: 20vh;
-    position: sticky;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 10%;
-    font-size: calc(2em + 1vw);
-    font-family: 'Montserrat', sans-serif;
-    transform: scaleX(.9);
+.hamburger-menu,
+.search-menu {
+  width: 100%;
+  height: 130vh;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(7px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: transform 0.4s ease;
+  display: flex;
+  justify-content: center;
+}
+.hamburger-menu--show {
+  transform: translateX(0);
+}
+.search-menu--show {
+  transform: translateX(0);
+}
+.centered-menu,
+.input__container {
+  width: auto;
+  height: 60vh;
+  top: 20vh;
+  position: sticky;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10%;
+  font-size: calc(2em + 1vw);
+  font-family: "Montserrat", sans-serif;
+  transform: scaleX(0.9);
 }
 .centered-menu span a:active {
-    color: var(--solitary-chalet);
-    transition: .2s ease;
+  color: var(--solitary-chalet);
+  transition: 0.2s ease;
 }
-.input__container input{
-    height: 10%;
-    width: 80%;
-    padding: 20px;
-    max-width: 800px;
-    outline: none;
-    background-color: rgba(206, 155, 62, 0.63);
-    border: none;
-    border-radius: 30px;
-    color: white;
-    font-size: 1.5rem;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+.input__container input {
+  height: 10%;
+  width: 80%;
+  padding: 20px;
+  max-width: 800px;
+  outline: none;
+  background-color: rgba(206, 155, 62, 0.63);
+  border: none;
+  border-radius: 30px;
+  color: white;
+  font-size: 1.5rem;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
+
+/* Footer */
+.navContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 15%;
 }
 /* landscape */
 @media (min-width: 560px) and (orientation: landscape) {
-    body {
-        grid-template: 15vh repeat(2, 1fr) / 7% repeat(2, 1fr);
-        grid-template-areas: 
-            "left-menu renting nav"
-            "left-menu product play"
-            "left-menu details-left details-right";
-        font-size: calc(.6em + .3vw);
-    }
-    img {width: calc(1em + .3vw);}
-    .hamburger-menu, .search-menu {height: 100%;}
-    .menu-close{
-        position: fixed;
-        top: 3.5%;
-    }
-    .renting {
-        margin-left: 5%;
-        justify-self: flex-start;
-        width: 40%;
-        height: 12vh;
-    }
-    .media-icons, .invisible-background {
-        position: absolute;
-        left: -200vw;
-    }
-    .left-menu {
-        grid-area: left-menu;
-        position: fixed;
-        flex-direction: column;
-        justify-content: flex-start;
-        gap: 2%;
-        height: 100%;
-        padding: 0;
-        padding-top: 2%;
-        background: rgba(14, 13, 13, 0.644);
-        backdrop-filter: blur( 10.0px );
-        -webkit-backdrop-filter: blur( 10.0px );
-    }
-    nav {
-        flex-direction: initial;
-        gap: 2vw;
-        font-size: calc(.7em + .3vw);
-    }
-    .product {
-        align-self: flex-end;
-        width: auto;
-    }
-    .play-video {
-        justify-self: flex-end;
-        align-self: flex-end;
-        margin: 0;
-        margin-right: 10%;
-        font-size: smaller;
-    }
-    .house__details {height: auto;}
+  body {
+    grid-template: 15vh repeat(2, 43vh) 30vh / 7% repeat(2, 1fr);
+    grid-template-areas:
+      "left-menu renting _ "
+      "left-menu product play"
+      "left-menu details-left details-right"
+      "left-menu  footer footer";
+    font-size: calc(0.6em + 0.3vw);
+  }
+  img {
+    width: calc(1em + 0.3vw);
+  }
+  .left-menu {
+    grid-area: left-menu;
+    position: fixed;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 2%;
+    height: 100%;
+    padding: 0;
+    padding-top: 2%;
+    background: rgba(14, 13, 13, 0.644);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+  .hamburger-menu,
+  .search-menu {
+    height: 100%;
+  }
+  .menu-close {
+    position: fixed;
+    top: 3.5%;
+  }
+  .renting {
+    margin-left: 5%;
+    justify-self: flex-start;
+    width: 40%;
+    height: 12vh;
+  }
+
+  /* Footer */
+  footer {
+    flex-direction: column;
+    align-items: center;
+  }
+  .navContainer {
+    height: 40%;
+    width: inherit;
+    flex-wrap: wrap;
+    align-content: center;
+    align-self: center;
+    gap: 10px;
+  }
+
+  nav {
+    width: max-content;
+    flex-direction: row;
+    order: 0;
+  }
+
+  .media-icons {
+    order: 1;
+    flex-direction: row;
+  }
+
+  .logosContainer {
+    display: flex;
+    flex-direction: row;
+    gap: 10%;
+  }
+
+  .product {
+    align-self: flex-end;
+    width: auto;
+  }
+  .play-video {
+    justify-self: flex-end;
+    align-self: flex-end;
+    margin: 0;
+    margin-right: 10%;
+    font-size: smaller;
+  }
+  .house__details {
+    height: auto;
+  }
 }
 @media (min-width: 1024px) and (orientation: landscape) {
-    img {width: calc(1em + 1vw);}
-    .renting {font-size: calc(1em + .8vw);}
-    nav {font-size: calc(.6em + 1vw);}
-    .product {
-        font-size: 1.5em;
-        max-width: 100%;
-    }
-    .product__invisible-text {
-        font-size: calc(3em + 1vw);
-        top: calc(-22px - calc(.5em + .5vw));
-    }
-    .product .product__description {width: 70%;}
-    .play-video .play-video__icon {
-        width: 50px;
-        height: 50px;
-    }
-    
-    .play-video__icon:hover {transform: scale(1.2);}
-    .house__details:hover {transform: scale(1.1);}
-    .centered-menu span a:hover {color: rgba(245, 219, 105, 0.87);}
+  img {
+    width: calc(1em + 1vw);
+  }
+  .renting {
+    font-size: calc(1em + 0.8vw);
+  }
+  nav {
+    font-size: calc(0.6em + 1vw);
+  }
+  .product {
+    font-size: 1.5em;
+    max-width: 100%;
+  }
+  .product__invisible-text {
+    font-size: calc(3em + 1vw);
+    top: calc(-22px - calc(0.5em + 0.5vw));
+  }
+  .product .product__description {
+    width: 70%;
+  }
+  .play-video .play-video__icon {
+    width: 50px;
+    height: 50px;
+  }
+
+  .play-video__icon:hover {
+    transform: scale(1.2);
+  }
+  .house__details:hover {
+    transform: scale(1.1);
+  }
+  .centered-menu span a:hover {
+    color: rgba(245, 219, 105, 0.87);
+  }
 }
 /* portrait */
 @media (min-width: 320px) and (orientation: portrait) {
-    /* Hidden gallery */
-    .gallery-hidden {
-        height: 100vh;
-        width: 100%;
-        position: absolute;
-        display:none;
-        flex-direction: column;
-        padding-top: 11vh;
-        z-index: 2;
-        transform: translateY(100vh);
-        background: rgba( 23, 21, 20, 0.60 );
-        backdrop-filter: blur( 10.0px );
-        -webkit-backdrop-filter: blur( 10.0px );
-        transition: transform .6s ease-in-out;
-        overscroll-behavior: contain;
-        overflow: scroll;
-    }
-    .gallery-show {
-        display:initial;
-    }
-    .gallery-show--transition {
-        transform: translateY(0);
-        transition: transform .6s ease-in-out;
-    }
-    .gallery-houses-container {
-        display: flex;
-        flex-direction: column;
-        gap: 40px;
-        padding: 35px;
-        /* overflow: scroll; */
-    }
-    .gallery__houses {
-        position: relative;
-        height: 200px;
-        display: flex;
-        align-items: flex-end;
-        background-image: url(images/solitary-chalet-768min.jpg);
-        border-radius: 10px;
-        padding: 15px;
-        text-align: center;
-        overflow: hidden;
-    }
+  /* Hidden gallery */
 
-    .gallery__houses--solitary-chalet {
-        background-image: url(images/solitary-chalet.webp);
-        background-size:cover;
-    }
-    .gallery__houses--corner-cottage {
-        background-image: url(images/cottage.jpg);
-        background-size: cover;
-    }
-    .gallery__houses--woodlands {
-        background-image: url(images/woodlands.jpg);
-        background-size: cover;
-    }
-    .gallery__houses--little-copse {
-        background-image: url(images/copse.jpg);
-        background-size: cover;
-    }
-    .gallery__houses--cuckoos-nest {
-        background-image: url(images/nest.jpg);
-        background-size: cover;
-    }
-    .gallery__houses:hover {transform: scale(1.1);}
-    .gallery__houses:hover .gallery__houses-description{
-        position: relative;
-        top: 0;
-    }
-    .gallery__houses-description {
-        /* position: absolute; */
-        top: 100%;
-        transition: .4s ease;
-    }
-
-
-    /* end */
-    body {
-        height: auto;
-        grid-template-rows: 15vh 60vh 15vh 15vh 25vh;
-        background-image: url(images/solitary-chalet-mobile-320min.jpg);
-    }
-    .search-menu {position: absolute; transform:translateX(100vw);}
-    .search-menu--show {transform: translateX(0);}
-    .menu-close{
-        position: fixed;
-        right: calc(100vw/7 - calc(1em + .3vw));;
-        top: 3.5%;
-    }
-    .hamburger-menu__close {left: calc(100vw/7 - calc(1em + .3vw));}
-    .play-video__icon:active {
-        transform: scale(1.2);
-    }
+  /* end */
+  body {
+    height: auto;
+    grid-template-rows: 15vh 60vh 15vh 15vh 25vh;
+    background-image: url(images/solitary-chalet-mobile-320min.jpg);
+  }
+  .search-menu {
+    position: absolute;
+    transform: translateX(100vw);
+  }
+  .search-menu--show {
+    transform: translateX(0);
+  }
+  .menu-close {
+    position: fixed;
+    right: calc(100vw / 7 - calc(1em + 0.3vw));
+    top: 3.5%;
+  }
+  .hamburger-menu__close {
+    left: calc(100vw / 7 - calc(1em + 0.3vw));
+  }
+  .play-video__icon:active {
+    transform: scale(1.2);
+  }
 }
 @media (min-width: 768px) and (orientation: portrait) {
-    body {
-        grid-template-rows:  15vh 60vh 30vh 5vh 25vh;
-        background-image: url(images/solitary-chalet-768min.jpg);
-    }
-    img {width: calc(2em + .3vw);}
-    .renting {font-size: calc(1.5em + .2vw);}
-    nav {font-size: calc(1em + .4vw);}
-    .product {
-        font-size: calc(1.5em + .5vw);
-        max-width: 80%;
-    }
-    .product .product__invisible-text {font-size: calc(3em + .2vw);}
-    .product .product__invisible-text {top: calc(-22px - calc(.7em + .5vw));}
-    .play-video .play-video__icon {
-        width: 50px;
-        height: 50px;
-    }
-    .house__details {
-        width: 65%;
-        margin-bottom: 15%;
-    }
-    .house__details--left {
-        grid-column: 1 / 3;
-        justify-self: flex-start;
-        margin-left: 5%;
-    }
-    .house__details--right {
-        grid-row: 3 / 4;
-        grid-column: 2 / 4;
-        justify-self: flex-end;
-        margin-right: 5%;
-    }
+  body {
+    grid-template-rows: 15vh 60vh 30vh 5vh 25vh;
+    background-image: url(images/solitary-chalet-768min.jpg);
+  }
+  img {
+    width: calc(2em + 0.3vw);
+  }
+  .renting {
+    font-size: calc(1.5em + 0.2vw);
+  }
+  nav {
+    font-size: calc(1em + 0.4vw);
+  }
+  .product {
+    font-size: calc(1.5em + 0.5vw);
+    max-width: 80%;
+  }
+  .product .product__invisible-text {
+    font-size: calc(3em + 0.2vw);
+  }
+  .product .product__invisible-text {
+    top: calc(-22px - calc(0.7em + 0.5vw));
+  }
+  .play-video .play-video__icon {
+    width: 50px;
+    height: 50px;
+  }
+  .house__details {
+    width: 65%;
+    margin-bottom: 15%;
+  }
+  .house__details--left {
+    grid-column: 1 / 3;
+    justify-self: flex-start;
+    margin-left: 5%;
+  }
+  .house__details--right {
+    grid-row: 3 / 4;
+    grid-column: 2 / 4;
+    justify-self: flex-end;
+    margin-right: 5%;
+  }
+}
+
+.gallery-hidden {
+  height: 100vh;
+  width: 100%;
+  position: absolute;
+  display: none;
+  flex-direction: column;
+  padding-top: 11vh;
+  z-index: 2;
+  transform: translateX(-100vh);
+  background: rgba(23, 21, 20, 0.6);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: transform 0.6s ease-in-out;
+  overscroll-behavior: contain;
+  overflow: scroll;
+}
+.gallery-show {
+  display: initial;
+}
+.gallery-show--transition {
+  transform: translateX(0);
+  transition: transform 0.6s ease-in-out;
+}
+.gallery-houses-container {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  padding: 35px;
+  /* overflow: scroll; */
+}
+.gallery__houses {
+  position: relative;
+  height: 200px;
+  display: flex;
+  align-items: flex-end;
+  background-image: url(images/solitary-chalet-768min.jpg);
+  border-radius: 10px;
+  padding: 15px;
+  text-align: center;
+  overflow: hidden;
+}
+
+.gallery__houses--solitary-chalet {
+  background-image: url(images/solitary-chalet.webp);
+  background-size: cover;
+}
+.gallery__houses--corner-cottage {
+  background-image: url(images/cottage.jpg);
+  background-size: cover;
+}
+.gallery__houses--woodlands {
+  background-image: url(images/woodlands.jpg);
+  background-size: cover;
+}
+.gallery__houses--little-copse {
+  background-image: url(images/copse.jpg);
+  background-size: cover;
+}
+.gallery__houses--cuckoos-nest {
+  background-image: url(images/nest.jpg);
+  background-size: cover;
+}
+.gallery__houses:hover {
+  transform: scale(1.1);
+}
+.gallery__houses:hover .gallery__houses-description {
+  position: relative;
+  top: 0;
+}
+.gallery__houses-description {
+  /* position: absolute; */
+  top: 100%;
+  transition: 0.4s ease;
+}
