@@ -2,6 +2,15 @@
 
 const html = document.querySelector("html");
 const learnMoreBtn = document.querySelector(".product__learn-more");
+
+//media queries
+let mobLandscapeMediaQuery = window.matchMedia(
+  "(min-width: 560px) and (orientation: landscape)"
+);
+let mobPortraitMediaQuery = window.matchMedia(
+  "(min-width: 320px) and (orientation: portrait)"
+);
+
 //hamburger menus
 const menus = document.querySelectorAll(".menu");
 const hamMenu = document.querySelector(".hamburger-menu");
@@ -27,6 +36,7 @@ const navContainer = document.querySelector(".navContainer");
 const invisibleTitle = document.querySelector(".product__invisible-text");
 const title = document.querySelector("h1");
 const housesContainer = document.querySelector(".centered-menu");
+const galleryHousesCont = document.querySelector(".gallery-houses-container");
 const chalet = document.querySelector(".solitary-chalet");
 const cottage = document.querySelector(".corner-cottage");
 const woodlands = document.querySelector(".woodlands");
@@ -209,21 +219,23 @@ function showHiddenMenus(e) {
   const searchTarget = e.target === searchBtn || e.target === searchBtnImg;
   if (hamTarget) {
     hiddenGallery.classList.add("gallery-show");
-    setTimeout(
-      () => hiddenGallery.classList.toggle("gallery-show--transition"),
-      0
-    );
+    setTimeout(() => {
+      hiddenGallery.classList.toggle("gallery-show--transition");
+      galleryHousesCont.classList.toggle(
+        "gallery-houses-container--transition"
+      );
+    }, 0);
     // hamMenu.classList.toggle("hamburger-menu--show");
     // removeGalleryFromOutsideHouses(e);
     // removeMenus(searchMenu, "search");
     // hiddeMenus(hamMenu, "hamburger", "centered-menu");
-    html.classList.toggle("overflow-hidden");
+    // html.classList.toggle("overflow-hidden");
   } else if (searchTarget) {
     searchMenu.classList.toggle("search-menu--show");
     removeGalleryFromOutsideHouses(e);
     removeMenus(hamMenu, "hamburger");
     hiddeMenus(searchMenu, "search", "input-container");
-    html.classList.toggle("overflow-hidden");
+    // html.classList.toggle("overflow-hidden");
   }
 }
 
@@ -242,21 +254,32 @@ const removeGalleryFromInsideHouses = function (e) {
     hiddenGallery.classList.remove("gallery-show--transition");
   }
 };
-//hidde menus \
+//hidde menus
 const hiddeMenus = function (menu, menuClass, referClass) {
   menu.addEventListener("click", function (e) {
     if (!e.target.classList.contains(referClass)) {
       removeMenus(menu, menuClass);
-      html.classList.toggle("overflow-hidden");
+      // html.classList.toggle("overflow-hidden");
     }
   });
 };
+
+//move gallery houses container programmatically
+window.addEventListener("scroll", function () {
+  const scrollTop = document.documentElement.scrollTop;
+  const scrollHeight = document.documentElement.scrollHeight;
+  const clientHeight = document.documentElement.clientHeight;
+  const scrollabeHeight = scrollHeight - clientHeight;
+  const calcScrollPercentage = (scrollTop / scrollabeHeight) * 40;
+  if (calcScrollPercentage <= 10 && mobLandscapeMediaQuery.matches) {
+    galleryHousesCont.style.top = `7%`;
+  } else galleryHousesCont.style.top = `${calcScrollPercentage}%`;
+});
+
 //EVENT LISTENERS
 //open gallery
 gallery.addEventListener("click", function () {
-  //fc
-  hiddenGallery.classList.add("gallery-show");
-  setTimeout(() => hiddenGallery.classList.add("gallery-show--transition"), 0);
+  hamMenu.classList.add("hamburger-menu--show");
 });
 
 learnMoreBtn.addEventListener("click", (e) => {
@@ -282,7 +305,7 @@ housesContainer.addEventListener("click", (e) => {
   if (e.target !== housesContainer) {
     changeToHouse(targetObject);
     removeMenus(hamMenu, "hamburger");
-    html.classList.toggle("overflow-hidden");
+    // html.classList.toggle("overflow-hidden");
   }
 });
 
@@ -296,24 +319,21 @@ hiddenGallery.addEventListener("click", function (e) {
 
 //Media queries
 
-let mobLandscapeMediaQuery = window.matchMedia(
-  "(min-width: 560px) and (orientation: landscape)"
-);
-let mobPortraitMediaQuery = window.matchMedia(
-  "(min-width: 320px) and (orientation: portrait)"
-);
-
-console.log(mobLandscapeMediaQuery, mobPortraitMediaQuery);
-const joinLogosFooter = function () {
+const joinFooterLogos = function () {
   if (mobPortraitMediaQuery.matches) {
     navContainer.append(leftLogo, rightLogo);
-    console.log(`portrait ${mobPortraitMediaQuery.matches}`);
   } else if (mobLandscapeMediaQuery.matches) {
     const logosContainer = document.createElement("div");
     logosContainer.classList.add("logosContainer");
     logosContainer.append(leftLogo, rightLogo);
     footer.append(logosContainer);
-    console.log(`landscape ${mobLandscapeMediaQuery.matches}`);
   }
 };
-joinLogosFooter();
+joinFooterLogos();
+nav.addEventListener("click", function (e) {
+  e.preventDefault();
+  console.log(e.target.classList.contains("nav__el"));
+  if (e.target.classList.contains("nav__el")) {
+    storeName.scrollIntoView({ behavior: "smooth" });
+  }
+});

@@ -15,7 +15,7 @@
 html,
 body {
   position: relative;
-  max-width: 100%;
+  max-width: 100vw;
   overflow-x: hidden;
 }
 .overflow-hidden {
@@ -31,9 +31,9 @@ html {
   transform: translateX(-100vw);
 }
 .search-menu {
-  position: absolute;
   transform: translateX(-100vw);
 }
+
 a {
   text-decoration: none;
   color: white;
@@ -58,7 +58,7 @@ img {
   cursor: pointer;
 }
 body {
-  height: 100vh;
+  height: 100%;
   display: grid;
   grid-template: 15vh 60vh 30vh 30vh 25vh / repeat(3, 1fr);
   grid-template-areas:
@@ -217,26 +217,19 @@ nav {
   z-index: 1;
   order: 2;
 }
-footer {
-  display: flex;
-  justify-content: center;
-  width: 101%;
-  height: 25vh;
-  background-color: #171514;
-  grid-row: 5 / span 1;
-  grid-column: 1 / span 3;
-  z-index: 0;
-}
 .hamburger-menu,
 .search-menu {
   width: 100%;
-  height: 130vh;
+  height: 100%;
   background: rgba(0, 0, 0, 0.6);
   backdrop-filter: blur(7px);
   -webkit-backdrop-filter: blur(10px);
   transition: transform 0.4s ease;
   display: flex;
   justify-content: center;
+  z-index: 1;
+  position: fixed;
+  top: 0;
 }
 .hamburger-menu--show {
   transform: translateX(0);
@@ -247,14 +240,14 @@ footer {
 .centered-menu,
 .input__container {
   width: auto;
-  height: 60vh;
-  top: 20vh;
+  height: 100vh;
   position: sticky;
+  top: 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 10%;
+  gap: 4%;
   font-size: calc(2em + 1vw);
   font-family: "Montserrat", sans-serif;
   transform: scaleX(0.9);
@@ -264,7 +257,7 @@ footer {
   transition: 0.2s ease;
 }
 .input__container input {
-  height: 10%;
+  height: 5rem;
   width: 80%;
   padding: 20px;
   max-width: 800px;
@@ -279,6 +272,16 @@ footer {
 }
 
 /* Footer */
+footer {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 25vh;
+  background-color: #171514;
+  grid-row: 5 / span 1;
+  grid-column: 1 / span 3;
+  z-index: 0;
+}
 .navContainer {
   display: flex;
   flex-direction: row;
@@ -312,9 +315,24 @@ footer {
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
   }
+  /* gallery */
+  body .gallery-hidden {
+    /* width: auto; */
+    height: 100%;
+  }
+  .gallery-houses-container {
+    position: absolute;
+  }
+  .menu .gallery-houses-container {
+    flex-direction: row;
+  }
+  .menu .gallery__houses {
+    width: 50vw;
+  }
   .hamburger-menu,
   .search-menu {
     height: 100%;
+    z-index: 1;
   }
   .menu-close {
     position: fixed;
@@ -352,6 +370,7 @@ footer {
     flex-direction: row;
   }
 
+  /* added by JS */
   .logosContainer {
     display: flex;
     flex-direction: row;
@@ -412,7 +431,12 @@ footer {
 /* portrait */
 @media (min-width: 320px) and (orientation: portrait) {
   /* Hidden gallery */
-
+  .gallery-hidden {
+    height: 100vh;
+  }
+  .gallery-houses-container {
+    position: relative;
+  }
   /* end */
   body {
     height: auto;
@@ -420,7 +444,6 @@ footer {
     background-image: url(images/solitary-chalet-mobile-320min.jpg);
   }
   .search-menu {
-    position: absolute;
     transform: translateX(100vw);
   }
   .search-menu--show {
@@ -484,7 +507,6 @@ footer {
 }
 
 .gallery-hidden {
-  height: 100vh;
   width: 100%;
   position: absolute;
   display: none;
@@ -502,16 +524,17 @@ footer {
 .gallery-show {
   display: initial;
 }
-.gallery-show--transition {
+.gallery-show--transition,
+.gallery-houses-container--transition {
   transform: translateX(0);
-  transition: transform 0.6s ease-in-out;
 }
 .gallery-houses-container {
+  /* transform: translateX(-100vh); */
   display: flex;
   flex-direction: column;
   gap: 40px;
   padding: 35px;
-  /* overflow: scroll; */
+  transition: transform 0.6s ease-in-out;
 }
 .gallery__houses {
   position: relative;
