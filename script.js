@@ -218,18 +218,8 @@ function showHiddenMenus(e) {
   const hamTarget = e.target === hamButton || e.target === hamBtnImg;
   const searchTarget = e.target === searchBtn || e.target === searchBtnImg;
   if (hamTarget) {
-    hiddenGallery.classList.add("gallery-show");
-    setTimeout(() => {
-      hiddenGallery.classList.toggle("gallery-show--transition");
-      galleryHousesCont.classList.toggle(
-        "gallery-houses-container--transition"
-      );
-    }, 0);
-    // hamMenu.classList.toggle("hamburger-menu--show");
-    // removeGalleryFromOutsideHouses(e);
-    // removeMenus(searchMenu, "search");
-    // hiddeMenus(hamMenu, "hamburger", "centered-menu");
-    // html.classList.toggle("overflow-hidden");
+    hiddenGallery.classList.toggle("gallery-show");
+    galleryHousesCont.classList.toggle("gallery-houses-container--transition");
   } else if (searchTarget) {
     searchMenu.classList.toggle("search-menu--show");
     removeGalleryFromOutsideHouses(e);

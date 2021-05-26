@@ -317,8 +317,11 @@ footer {
   }
   /* gallery */
   body .gallery-hidden {
-    /* width: auto; */
+    transform: translateX(-100vw);
     height: 100%;
+  }
+  body .gallery-show {
+    transform: translateX(0);
   }
   .gallery-houses-container {
     position: absolute;
@@ -509,7 +512,6 @@ footer {
 .gallery-hidden {
   width: 100%;
   position: absolute;
-  display: none;
   flex-direction: column;
   padding-top: 11vh;
   z-index: 2;
@@ -517,17 +519,16 @@ footer {
   background: rgba(23, 21, 20, 0.6);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  transition: transform 0.6s ease-in-out;
   overscroll-behavior: contain;
   overflow: scroll;
+  transition: transform 0.6s ease-in-out;
 }
 .gallery-show {
-  display: initial;
-}
-.gallery-show--transition,
-.gallery-houses-container--transition {
   transform: translateX(0);
 }
+/* .gallery-show--transition,
+.gallery-houses-container--transition {
+} */
 .gallery-houses-container {
   /* transform: translateX(-100vh); */
   display: flex;
