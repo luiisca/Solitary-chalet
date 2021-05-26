@@ -265,7 +265,7 @@ const hiddeMenus = function (menu, menuClass, referClass) {
 };
 
 //move gallery houses container programmatically
-window.addEventListener("scroll", function () {
+const centerGalHouses = function () {
   const scrollTop = document.documentElement.scrollTop;
   const scrollHeight = document.documentElement.scrollHeight;
   const clientHeight = document.documentElement.clientHeight;
@@ -274,7 +274,8 @@ window.addEventListener("scroll", function () {
   if (calcScrollPercentage <= 10 && mobLandscapeMediaQuery.matches) {
     galleryHousesCont.style.top = `7%`;
   } else galleryHousesCont.style.top = `${calcScrollPercentage}%`;
-});
+};
+window.addEventListener("scroll", centerGalHouses);
 
 //EVENT LISTENERS
 //open gallery
@@ -317,19 +318,17 @@ hiddenGallery.addEventListener("click", function (e) {
   }
 });
 
-//Media queries
-
-const joinFooterLogos = function () {
-  if (mobPortraitMediaQuery.matches) {
-    navContainer.append(leftLogo, rightLogo);
-  } else if (mobLandscapeMediaQuery.matches) {
+mobLandscapeMediaQuery.addEventListener("change", function (e) {
+  if (e.matches) {
     const logosContainer = document.createElement("div");
     logosContainer.classList.add("logosContainer");
     logosContainer.append(leftLogo, rightLogo);
     footer.append(logosContainer);
+  } else {
+    navContainer.append(leftLogo, rightLogo);
   }
-};
-joinFooterLogos();
+});
+
 nav.addEventListener("click", function (e) {
   e.preventDefault();
   console.log(e.target.classList.contains("nav__el"));
