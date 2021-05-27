@@ -319,6 +319,7 @@ footer {
   body .gallery-hidden {
     transform: translateX(-100vw);
     height: 100%;
+    overflow: hidden;
   }
   body .gallery-menu--show {
     transform: translateX(0);
@@ -478,6 +479,34 @@ footer {
     height: 40%;
   }
 }
+@media (min-width: 1400px) and (orientation: landscape) {
+  body {
+    grid-template: 15vh 35vh 0 50vh auto/ 7% repeat(2, 1fr);
+    grid-template-areas:
+      "left-menu renting _ "
+      "left-menu product play"
+      "left-menu details-left details-right"
+      "left-menu footer footer";
+    font-size: calc(0.3em + 0.25vw);
+  }
+  body .house__details {
+    height: 30%;
+  }
+  nav {
+    font-size: calc(2em + 0.2vw);
+  }
+  .left-menu {
+    width: 4%;
+  }
+  body .gallery-houses-container {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  body .gallery__houses {
+    width: 30vw;
+    height: 40vh;
+  }
+}
 /* portrait */
 @media (min-width: 280px) and (orientation: portrait) {
   /* Hidden gallery */
@@ -531,7 +560,7 @@ footer {
   .renting {
     font-size: calc(1.5em + 0.2vw);
   }
-  nav {
+  body nav {
     font-size: calc(1em + 0.4vw);
   }
   .product {
@@ -550,9 +579,10 @@ footer {
   }
   .house__details {
     width: 85%;
+    height: 45%;
     margin-bottom: 0%;
-    max-height: 140px;
-    font-size: calc(1.3em + 0.5vw);
+    max-height: unset;
+    font-size: calc(1.2em + 1vw);
   }
   .house__details--left {
     grid-row: 3 / 4;
@@ -573,16 +603,6 @@ footer {
   body .centered-menu,
   .input__container {
     font-size: calc(3em + 1vw);
-  }
-}
-@media (min-width: 768px) and (orientation: portrait) {
-  .house__details {
-    height: 45%;
-    max-height: unset;
-    font-size: calc(1.2em + 1vw);
-  }
-  nav {
-    font-size: calc(2em + 0.4vw);
   }
 }
 
@@ -650,10 +670,10 @@ footer {
 .gallery__houses:hover {
   transform: scale(1.1);
 }
-.gallery__houses:hover .gallery__houses-description {
+/* .gallery__houses:hover .gallery__houses-description {
   position: relative;
   top: 0;
-}
+} */
 .gallery__houses-description {
   /* position: absolute; */
   top: 100%;
