@@ -274,7 +274,16 @@ const centerGalHouses = function () {
     galleryHousesCont.style.top = `7%`;
   } else galleryHousesCont.style.top = `${calcScrollPercentage}%`;
 };
-window.addEventListener("scroll", centerGalHouses);
+//move gallery houses container programmatically
+mobLandscapeMediaQuery.addEventListener("change", function (e) {
+  console.log(e);
+  if (mobLandscapeMediaQuery.matches) {
+    galleryHousesCont.style.top = `7%`;
+  } else if (mobPortraitMediaQuery.matches) {
+    galleryHousesCont.style.top = `0%`;
+  }
+  window.addEventListener("scroll", centerGalHouses);
+});
 
 //EVENT LISTENERS
 //open gallery
