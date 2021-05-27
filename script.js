@@ -220,15 +220,24 @@ function showHiddenMenus(e) {
   if (hamTarget) {
     hiddenGallery.classList.toggle("gallery-show");
     galleryHousesCont.classList.toggle("gallery-houses-container--transition");
+    removeMenus(searchMenu, "search");
+    // hiddeMenus(searchMenu, "search", "input-container");
   } else if (searchTarget) {
     searchMenu.classList.toggle("search-menu--show");
-    removeGalleryFromOutsideHouses(e);
     removeMenus(hamMenu, "hamburger");
-    hiddeMenus(searchMenu, "search", "input-container");
+    // hiddeMenus(searchMenu, "search", "input-container");
     // html.classList.toggle("overflow-hidden");
   }
 }
 
+const removeSearchFromOutsideContent = function (e) {
+  if (
+    !e.target.classList.contains("input-container__text") &&
+    !e.target.classList.contains("input-container__input-box")
+  ) {
+    removeMenus(searchMenu, "search");
+  }
+};
 const removeGalleryFromOutsideHouses = function (e) {
   //fc
   if (!e.target.classList.contains("gallery__houses")) {
@@ -238,7 +247,6 @@ const removeGalleryFromOutsideHouses = function (e) {
 };
 
 const removeGalleryFromInsideHouses = function (e) {
-  console.log("hola", e.target);
   if (e.target.classList.contains("gallery__houses")) {
     hiddenGallery.classList.remove("gallery-show");
     hiddenGallery.classList.remove("gallery-show--transition");
@@ -283,6 +291,7 @@ searchBtn.addEventListener("click", showHiddenMenus);
 //gallery
 
 hiddenGallery.addEventListener("click", removeGalleryFromOutsideHouses);
+searchMenu.addEventListener("click", removeSearchFromOutsideContent);
 //change DOM
 const objectsMap = new Map([
   [`chalet`, chaletObject],
