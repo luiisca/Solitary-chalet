@@ -273,7 +273,11 @@ const centerGalHouses = function () {
   const scrollabeHeight = scrollHeight - clientHeight;
   const calcScrollPercentage = (scrollTop / scrollabeHeight) * 40;
   if (calcScrollPercentage <= 10 && mobLandscapeMediaQuery.matches) {
+    console.log(mobLandscapeMediaQuery.matches, "768");
     galleryHousesCont.style.top = `7%`;
+  } else if (calcScrollPercentage <= 10 && mobLandscapeMediaQuery1300.matches) {
+    console.log("1300");
+    galleryHousesCont.style.top = `10%`;
   } else galleryHousesCont.style.top = `${calcScrollPercentage}%`;
 };
 //move gallery houses container programmatically

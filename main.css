@@ -461,7 +461,7 @@ footer {
     font-size: calc(3em + 1vw);
   }
   body {
-    grid-template: 15vh 35vh 0 45vh 21vh/ 7% repeat(2, 1fr);
+    grid-template: 15vh 35vh 0 45vh auto/ 7% repeat(2, 1fr);
     grid-template-areas:
       "left-menu renting _ "
       "left-menu product play"
