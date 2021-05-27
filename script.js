@@ -218,13 +218,15 @@ function showHiddenMenus(e) {
   const hamTarget = e.target === hamButton || e.target === hamBtnImg;
   const searchTarget = e.target === searchBtn || e.target === searchBtnImg;
   if (hamTarget) {
-    hiddenGallery.classList.toggle("gallery-show");
+    hiddenGallery.classList.toggle("gallery-menu--show");
     galleryHousesCont.classList.toggle("gallery-houses-container--transition");
+    removeMenus(hamMenu, "hamburger");
     removeMenus(searchMenu, "search");
     // hiddeMenus(searchMenu, "search", "input-container");
   } else if (searchTarget) {
     searchMenu.classList.toggle("search-menu--show");
     removeMenus(hamMenu, "hamburger");
+    removeMenus(hiddenGallery, "gallery");
     // hiddeMenus(searchMenu, "search", "input-container");
     // html.classList.toggle("overflow-hidden");
   }
@@ -241,14 +243,14 @@ const removeSearchFromOutsideContent = function (e) {
 const removeGalleryFromOutsideHouses = function (e) {
   //fc
   if (!e.target.classList.contains("gallery__houses")) {
-    hiddenGallery.classList.remove("gallery-show");
+    hiddenGallery.classList.remove("gallery-menu--show");
     hiddenGallery.classList.remove("gallery-show--transition");
   }
 };
 
 const removeGalleryFromInsideHouses = function (e) {
   if (e.target.classList.contains("gallery__houses")) {
-    hiddenGallery.classList.remove("gallery-show");
+    hiddenGallery.classList.remove("gallery-menu--show");
     hiddenGallery.classList.remove("gallery-show--transition");
   }
 };
@@ -288,8 +290,8 @@ learnMoreBtn.addEventListener("click", (e) => {
 //hamburger & search menu
 hamButton.addEventListener("click", showHiddenMenus);
 searchBtn.addEventListener("click", showHiddenMenus);
-//gallery
 
+//gallery
 hiddenGallery.addEventListener("click", removeGalleryFromOutsideHouses);
 searchMenu.addEventListener("click", removeSearchFromOutsideContent);
 //change DOM
