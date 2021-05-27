@@ -256,6 +256,7 @@ nav {
   align-items: center;
   gap: 4%;
   font-size: calc(2em + 1vw);
+  text-align: center;
   font-family: "Montserrat", sans-serif;
   transform: scaleX(0.9);
 }
@@ -407,6 +408,23 @@ footer {
   img {
     width: calc(1em + 1vw);
   }
+  body {
+    grid-template: 15vh 35vh 0 45vh auto/ 7% repeat(2, 1fr);
+    grid-template-areas:
+      "left-menu renting _ "
+      "left-menu product play"
+      "left-menu details-left details-right"
+      "left-menu footer footer";
+  }
+  body .house__details {
+    font-size: calc(1.1em + 0.4vw);
+    height: 35%;
+  }
+  .house__details--left,
+  .house__details--right {
+    grid-row: 4/5;
+  }
+
   .renting {
     font-size: calc(1em + 0.8vw);
   }
@@ -460,14 +478,6 @@ footer {
   .input__container {
     font-size: calc(3em + 1vw);
   }
-  body {
-    grid-template: 15vh 35vh 0 45vh auto/ 7% repeat(2, 1fr);
-    grid-template-areas:
-      "left-menu renting _ "
-      "left-menu product play"
-      "left-menu details-left details-right"
-      "left-menu footer footer";
-  }
   .renting {
     font-size: calc(1em + 1vw);
   }
@@ -475,13 +485,9 @@ footer {
     font-size: calc(1.3em + 0.5vw);
     height: 40%;
   }
-  .house__details--left,
-  .house__details--right {
-    grid-row: 4/5;
-  }
 }
 /* portrait */
-@media (min-width: 320px) and (orientation: portrait) {
+@media (min-width: 280px) and (orientation: portrait) {
   /* Hidden gallery */
   .gallery-hidden {
     height: 100vh;
@@ -566,6 +572,16 @@ footer {
   body .centered-menu,
   .input__container {
     font-size: calc(3em + 1vw);
+  }
+}
+@media (min-width: 768px) and (orientation: portrait) {
+  .house__details {
+    height: 45%;
+    max-height: unset;
+    font-size: calc(1.2em + 1vw);
+  }
+  nav {
+    font-size: calc(2em + 0.4vw);
   }
 }
 
