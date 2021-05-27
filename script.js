@@ -263,7 +263,6 @@ const hiddeMenus = function (menu, menuClass, referClass) {
   });
 };
 
-//move gallery houses container programmatically
 const centerGalHouses = function () {
   const scrollTop = document.documentElement.scrollTop;
   const scrollHeight = document.documentElement.scrollHeight;
