@@ -168,7 +168,6 @@ aside .left-menu__search-button {
 .house__details {
   width: 90%;
   height: 80%;
-  max-height: 120px;
   padding: 5%;
   display: flex;
   align-items: center;
@@ -453,6 +452,34 @@ footer {
     padding: 10px;
   }
 }
+@media (min-width: 1300px) and (orientation: landscape) {
+  img {
+    width: calc(1.5em + 1vw);
+  }
+  body .centered-menu,
+  .input__container {
+    font-size: calc(3em + 1vw);
+  }
+  body {
+    grid-template: 15vh 35vh 0 45vh 21vh/ 7% repeat(2, 1fr);
+    grid-template-areas:
+      "left-menu renting _ "
+      "left-menu product play"
+      "left-menu details-left details-right"
+      "left-menu footer footer";
+  }
+  .renting {
+    font-size: calc(1em + 1vw);
+  }
+  body .house__details {
+    font-size: calc(1.3em + 0.5vw);
+    height: 40%;
+  }
+  .house__details--left,
+  .house__details--right {
+    grid-row: 4/5;
+  }
+}
 /* portrait */
 @media (min-width: 320px) and (orientation: portrait) {
   /* Hidden gallery */
@@ -492,7 +519,7 @@ footer {
     background-image: url(images/solitary-chalet-768min.jpg);
   }
   img {
-    width: calc(2em + 0.3vw);
+    width: calc(2.5em + 0.3vw);
   }
   .renting {
     font-size: calc(1.5em + 0.2vw);

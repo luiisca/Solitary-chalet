@@ -4,10 +4,13 @@ const html = document.querySelector("html");
 const learnMoreBtn = document.querySelector(".product__learn-more");
 
 //media queries
-let mobLandscapeMediaQuery = window.matchMedia(
+const mobLandscapeMediaQuery = window.matchMedia(
   "(min-width: 560px) and (orientation: landscape)"
 );
-let mobPortraitMediaQuery = window.matchMedia(
+const mobLandscapeMediaQuery1300 = window.matchMedia(
+  "(min-width: 1300px) and (orientation: landscape)"
+);
+const mobPortraitMediaQuery = window.matchMedia(
   "(min-width: 320px) and (orientation: portrait)"
 );
 
@@ -275,7 +278,6 @@ const centerGalHouses = function () {
 };
 //move gallery houses container programmatically
 mobLandscapeMediaQuery.addEventListener("change", function (e) {
-  console.log(e);
   if (mobLandscapeMediaQuery.matches) {
     galleryHousesCont.style.top = `7%`;
   } else if (mobPortraitMediaQuery.matches) {
