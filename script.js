@@ -13,7 +13,7 @@ let mobPortraitMediaQuery = window.matchMedia(
 
 //hamburger menus
 const menus = document.querySelectorAll(".menu");
-const hamMenu = document.querySelector(".hamburger-menu");
+const justTextGallery = document.querySelector(".hamburger-menu");
 const hamButton = document.querySelector(".left-menu__menu-button");
 const hamBtnImg = document.querySelector(".left-menu__menu-img");
 const searchMenu = document.querySelector(".search-menu");
@@ -220,12 +220,11 @@ function showHiddenMenus(e) {
   if (hamTarget) {
     hiddenGallery.classList.toggle("gallery-menu--show");
     galleryHousesCont.classList.toggle("gallery-houses-container--transition");
-    removeMenus(hamMenu, "hamburger");
+    removeMenus(justTextGallery, "hamburger");
     removeMenus(searchMenu, "search");
-    // hiddeMenus(searchMenu, "search", "input-container");
   } else if (searchTarget) {
     searchMenu.classList.toggle("search-menu--show");
-    removeMenus(hamMenu, "hamburger");
+    removeMenus(justTextGallery, "hamburger");
     removeMenus(hiddenGallery, "gallery");
     // hiddeMenus(searchMenu, "search", "input-container");
     // html.classList.toggle("overflow-hidden");
@@ -280,7 +279,7 @@ window.addEventListener("scroll", centerGalHouses);
 //EVENT LISTENERS
 //open gallery
 gallery.addEventListener("click", function () {
-  hamMenu.classList.add("hamburger-menu--show");
+  justTextGallery.classList.add("hamburger-menu--show");
 });
 
 learnMoreBtn.addEventListener("click", (e) => {
@@ -306,7 +305,7 @@ housesContainer.addEventListener("click", (e) => {
   const targetObject = objectsMap.get(e.target.dataset.house);
   if (e.target !== housesContainer) {
     changeToHouse(targetObject);
-    removeMenus(hamMenu, "hamburger");
+    removeMenus(justTextGallery, "hamburger");
     // html.classList.toggle("overflow-hidden");
   }
 });

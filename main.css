@@ -28,7 +28,7 @@ html {
 }
 .hamburger-menu {
   position: absolute;
-  transform: translateX(-100vw);
+  transform: translateY(100vh);
 }
 .search-menu {
   transform: translateX(-100vw);
