@@ -93,14 +93,6 @@ aside {
   justify-content: space-between;
   height: 10vh;
 }
-aside .left-menu__menu-button {
-  padding-left: calc(100vw / 7 - calc(1em + 0.3vw));
-  padding-right: 50px;
-}
-aside .left-menu__search-button {
-  padding-left: 50px;
-  padding-right: calc(100vw / 7 - calc(1em + 0.3vw));
-}
 .product {
   grid-area: product;
   position: relative;
@@ -517,6 +509,15 @@ footer {
   }
   .play-video__icon:active {
     transform: scale(1.2);
+  }
+
+  aside .left-menu__menu-button {
+    padding-left: calc(100vw / 7 - calc(1em + 0.3vw));
+    padding-right: 50px;
+  }
+  aside .left-menu__search-button {
+    padding-left: 50px;
+    padding-right: calc(100vw / 7 - calc(1em + 0.3vw));
   }
 }
 @media (min-width: 768px) and (orientation: portrait) {
