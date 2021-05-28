@@ -319,6 +319,7 @@ footer {
   body .gallery-menu {
     transform: translateX(-100vw);
     height: 100%;
+    overflow-y: hidden;
   }
   body .gallery-menu--show {
     transform: translateX(0);

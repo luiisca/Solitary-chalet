@@ -4,8 +4,14 @@ const html = document.querySelector("html");
 const learnMoreBtn = document.querySelector(".product__learn-more");
 
 //media queries
-const mobLandscapeMediaQuery = window.matchMedia(
+const mobLandscapeMediaQuery560 = window.matchMedia(
   "(min-width: 560px) and (orientation: landscape)"
+);
+const mobLandscapeMediaQuery = window.matchMedia(
+  "(max-width: 1024px) and (orientation: landscape)"
+);
+const mobLandscapteMediaQuery1024 = window.matchMedia(
+  "(min-width: 1024px) and (orientation: landscape)"
 );
 const mobLandscapeMediaQuery1300 = window.matchMedia(
   "(min-width: 1300px) and (orientation: landscape)"
@@ -262,15 +268,20 @@ const centerGalHouses = function () {
   const scrollHeight = document.documentElement.scrollHeight;
   const clientHeight = document.documentElement.clientHeight;
   const scrollabeHeight = scrollHeight - clientHeight;
-  const calcScrollPercentage = (scrollTop / scrollabeHeight) * 40;
+  let calcScrollPercentage = (scrollTop / scrollabeHeight) * 40;
   if (calcScrollPercentage <= 10 && mobLandscapeMediaQuery1300.matches) {
     console.log(mobLandscapeMediaQuery1300.matches, "1300");
-    galleryHousesCont.style.top = `10%`;
+    galleryHousesCont.style.top = `9%`;
   } else if (calcScrollPercentage <= 10 && mobLandscapeMediaQuery.matches) {
     console.log(mobLandscapeMediaQuery.matches, "768");
     galleryHousesCont.style.top = `7%`;
-  } else if (mobLandscapeMediaQuery.matches)
+  } else if (mobLandscapteMediaQuery1024.matches) {
+    calcScrollPercentage = (scrollTop / scrollabeHeight) * 20;
     galleryHousesCont.style.top = `${calcScrollPercentage}%`;
+  } else if (mobLandscapeMediaQuery.matches) {
+    calcScrollPercentage = (scrollTop / scrollabeHeight) * 40;
+    galleryHousesCont.style.top = `${calcScrollPercentage}%`;
+  }
 };
 const verifyPresenceOfClasses = function (el, clas) {
   const removeClass = function () {
@@ -292,7 +303,8 @@ const verifyPresenceOfClassesAndChangeHtmlScroll = function (el, clas) {
 };
 
 //move gallery houses container programmatically
-mobLandscapeMediaQuery.addEventListener("change", function (e) {
+mobLandscapeMediaQuery560.addEventListener("change", function (e) {
+  console.log(e);
   if (mobLandscapeMediaQuery.matches) {
     galleryHousesCont.style.top = `7%`;
   } else if (mobPortraitMediaQuery.matches) {
