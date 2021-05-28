@@ -202,7 +202,6 @@ function showHiddenMenus(e) {
   const hamTarget = e.target === hamButton || e.target === hamBtnImg;
   const searchTarget = e.target === searchBtn || e.target === searchBtnImg;
   const galleryTarget = e.target === gallery;
-  console.log(e.target === gallery);
   if (hamTarget) {
     hiddenGallery.classList.toggle("gallery-menu--show");
     galleryHousesCont.classList.toggle("gallery-houses-container--transition");
@@ -264,13 +263,14 @@ const centerGalHouses = function () {
   const clientHeight = document.documentElement.clientHeight;
   const scrollabeHeight = scrollHeight - clientHeight;
   const calcScrollPercentage = (scrollTop / scrollabeHeight) * 40;
-  if (calcScrollPercentage <= 10 && mobLandscapeMediaQuery.matches) {
+  if (calcScrollPercentage <= 10 && mobLandscapeMediaQuery1300.matches) {
+    console.log(mobLandscapeMediaQuery1300.matches, "1300");
+    galleryHousesCont.style.top = `10%`;
+  } else if (calcScrollPercentage <= 10 && mobLandscapeMediaQuery.matches) {
     console.log(mobLandscapeMediaQuery.matches, "768");
     galleryHousesCont.style.top = `7%`;
-  } else if (calcScrollPercentage <= 10 && mobLandscapeMediaQuery1300.matches) {
-    console.log("1300");
-    galleryHousesCont.style.top = `10%`;
-  } else galleryHousesCont.style.top = `${calcScrollPercentage}%`;
+  } else if (mobLandscapeMediaQuery.matches)
+    galleryHousesCont.style.top = `${calcScrollPercentage}%`;
 };
 const verifyPresenceOfClasses = function (el, clas) {
   const removeClass = function () {
@@ -286,7 +286,6 @@ const verifyPresenceOfClassesAndChangeHtmlScroll = function (el, clas) {
   const verify = function () {
     if (el.classList.contains(clas)) {
       html.style.overflow = "hidden";
-      console.log("hola");
     }
   };
   verify();
