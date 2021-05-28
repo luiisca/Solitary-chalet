@@ -27,7 +27,7 @@ const searchBtnImg = document.querySelector(".left-menu__search-img");
 const storeName = document.querySelector(".renting");
 const gallery = document.querySelector(".nav__gallery");
 const galleryImgs = document.querySelectorAll(".gallery__houses");
-const hiddenGallery = document.querySelector(".gallery-hidden");
+const hiddenGallery = document.querySelector(".gallery-menu");
 
 //footer
 const footer = document.querySelector("footer");
@@ -125,27 +125,6 @@ const chaletObject = {
   transpPrincipalClr: "rgba(250, 179, 49, 0.53)",
 };
 
-//observer
-const menuObs = function (entries) {
-  //absolutely innecesary but good for practice
-  //fc
-  const [entry] = entries;
-  const target = entry.target.closest(".menu");
-  storeName.addEventListener("click", () => {
-    target.classList.remove(target.classList[2]);
-    html.classList.remove("overflow-hidden");
-  });
-};
-
-const menusObserver = new IntersectionObserver(menuObs, {
-  root: null,
-  threshold: 0,
-});
-
-menusObserver.observe(housesContainer);
-menusObserver.observe(searchInput);
-menusObserver.observe(hiddenGallery);
-
 //FUNCTIONS
 const initial = () => {
   chalet.style.color = "var(--solitary-chalet)";
@@ -220,17 +199,28 @@ const changeToHouse = ({
 function showHiddenMenus(e) {
   const hamTarget = e.target === hamButton || e.target === hamBtnImg;
   const searchTarget = e.target === searchBtn || e.target === searchBtnImg;
+  const galleryTarget = e.target === gallery;
+  console.log(e.target === gallery);
   if (hamTarget) {
     hiddenGallery.classList.toggle("gallery-menu--show");
     galleryHousesCont.classList.toggle("gallery-houses-container--transition");
     removeMenus(justTextGallery, "hamburger");
     removeMenus(searchMenu, "search");
+    verifyPresenceOfClassesAndChangeHtmlScroll(
+      hiddenGallery,
+      "gallery-menu--show"
+    );
   } else if (searchTarget) {
     searchMenu.classList.toggle("search-menu--show");
     removeMenus(justTextGallery, "hamburger");
     removeMenus(hiddenGallery, "gallery");
-    // hiddeMenus(searchMenu, "search", "input-container");
-    // html.classList.toggle("overflow-hidden");
+    verifyPresenceOfClassesAndChangeHtmlScroll(searchMenu, "search-menu--show");
+  } else if (galleryTarget) {
+    justTextGallery.classList.add("hamburger-menu--show");
+    verifyPresenceOfClassesAndChangeHtmlScroll(
+      justTextGallery,
+      "hamburger-menu--show"
+    );
   }
 }
 
@@ -261,7 +251,6 @@ const hiddeMenus = function (menu, menuClass, referClass) {
   menu.addEventListener("click", function (e) {
     if (!e.target.classList.contains(referClass)) {
       removeMenus(menu, menuClass);
-      // html.classList.toggle("overflow-hidden");
     }
   });
 };
@@ -280,6 +269,26 @@ const centerGalHouses = function () {
     galleryHousesCont.style.top = `10%`;
   } else galleryHousesCont.style.top = `${calcScrollPercentage}%`;
 };
+const verifyPresenceOfClasses = function (el, clas) {
+  const removeClass = function () {
+    if (el.classList.contains(clas)) {
+      el.classList.remove(clas);
+      console.log("succed");
+    }
+  };
+  removeClass();
+};
+const verifyPresenceOfClassesAndChangeHtmlScroll = function (el, clas) {
+  html.style.overflowY = "scroll";
+  const verify = function () {
+    if (el.classList.contains(clas)) {
+      html.style.overflow = "hidden";
+      console.log("hola");
+    }
+  };
+  verify();
+};
+
 //move gallery houses container programmatically
 mobLandscapeMediaQuery.addEventListener("change", function (e) {
   if (mobLandscapeMediaQuery.matches) {
@@ -291,18 +300,22 @@ mobLandscapeMediaQuery.addEventListener("change", function (e) {
 });
 
 //EVENT LISTENERS
-//open gallery
-gallery.addEventListener("click", function () {
-  justTextGallery.classList.add("hamburger-menu--show");
-});
-
 learnMoreBtn.addEventListener("click", (e) => {
   e.preventDefault();
   houseDetail1.scrollIntoView({ behavior: "smooth" });
 });
+
 //hamburger & search menu
+gallery.addEventListener("click", showHiddenMenus);
 hamButton.addEventListener("click", showHiddenMenus);
 searchBtn.addEventListener("click", showHiddenMenus);
+storeName.addEventListener("click", function () {
+  menus.forEach((el) => {
+    const classToRemove = `${el.classList[1]}--show`;
+    verifyPresenceOfClasses(el, classToRemove);
+    verifyPresenceOfClassesAndChangeHtmlScroll(el, classToRemove);
+  });
+});
 
 //gallery
 hiddenGallery.addEventListener("click", removeGalleryFromOutsideHouses);
@@ -320,7 +333,6 @@ housesContainer.addEventListener("click", (e) => {
   if (e.target !== housesContainer) {
     changeToHouse(targetObject);
     removeMenus(justTextGallery, "hamburger");
-    // html.classList.toggle("overflow-hidden");
   }
 });
 
