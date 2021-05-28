@@ -39,6 +39,8 @@ const navContainer = document.querySelector(".navContainer");
 const invisibleTitle = document.querySelector(".product__invisible-text");
 const title = document.querySelector("h1");
 const housesContainer = document.querySelector(".centered-menu");
+const housesContainerSpans = housesContainer.querySelectorAll("span");
+console.log(housesContainerSpans[1]);
 const galleryHousesCont = document.querySelector(".gallery-houses-container");
 const chalet = document.querySelector(".solitary-chalet");
 const cottage = document.querySelector(".corner-cottage");
@@ -229,6 +231,7 @@ const removeSearchFromOutsideContent = function (e) {
     !e.target.classList.contains("input-container__text") &&
     !e.target.classList.contains("input-container__input-box")
   ) {
+    html.style.overflowY = "scroll";
     removeMenus(searchMenu, "search");
   }
 };
@@ -328,6 +331,14 @@ const objectsMap = new Map([
   [`nest`, nestObject],
   [`cottage`, cottageObject],
 ]);
+justTextGallery.addEventListener("click", function (e) {
+  housesContainerSpans.forEach((el) => {
+    if (e.target !== el) {
+      html.style.overflowY = "scroll";
+      removeMenus(justTextGallery, "hamburger");
+    }
+  });
+});
 housesContainer.addEventListener("click", (e) => {
   const targetObject = objectsMap.get(e.target.dataset.house);
   if (e.target !== housesContainer) {
@@ -342,6 +353,7 @@ hiddenGallery.addEventListener("click", function (e) {
     changeToHouse(targetObject);
     removeGalleryFromInsideHouses(e);
   }
+  html.style.overflowY = "scroll";
 });
 
 mobLandscapeMediaQuery.addEventListener("change", function (e) {
