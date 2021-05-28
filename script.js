@@ -56,9 +56,11 @@ const nest = document.querySelector(".cuckoos-nest");
 const houseDescription = document.querySelector(".product__description");
 const houseDetail1 = document.querySelector(".house__details--left").lastChild;
 const houseDetail2 = document.querySelector(".house__details--right").lastChild;
+const formInput = document.querySelector(".form");
 const searchInput = document
   .querySelector(".input__container")
   .querySelector("input");
+const inputSubmit = document.querySelector(".input-submit");
 const playVideoBtn = document.querySelector(".play-video__icon");
 const nav = document.querySelector("nav");
 const housesOptions = document.querySelectorAll(".menu__houses");
@@ -199,6 +201,7 @@ const changeToHouse = ({
   document.querySelector(elementClassName).style.color = principalClr;
   searchInput.style.backgroundColor = transpPrincipalClr;
   invisibleTitle.style.color = transpPrincipalClr;
+  inputSubmit.style.backgroundColor = transpPrincipalClr;
   changeColorHoverNav("mouseover", "mouseout", principalClr, "white");
   changeVideoLogoColor("rgb(52, 50, 48)", principalClr);
 };
@@ -234,10 +237,13 @@ function showHiddenMenus(e) {
 const removeSearchFromOutsideContent = function (e) {
   if (
     !e.target.classList.contains("input-container__text") &&
-    !e.target.classList.contains("input-container__input-box")
+    !e.target.classList.contains("input-container__input-box") &&
+    !e.target.classList.contains("input-submit")
   ) {
     html.style.overflowY = "scroll";
     removeMenus(searchMenu, "search");
+    searchInput.classList.remove("input-container__input-box--searching");
+    inputSubmit.classList.remove("input-submit--show");
   }
 };
 const removeGalleryFromOutsideHouses = function (e) {
@@ -337,10 +343,22 @@ searchMenu.addEventListener("click", removeSearchFromOutsideContent);
 //change DOM
 const objectsMap = new Map([
   [`chalet`, chaletObject],
+  [`solitary`, chaletObject],
+  [`solitary chalet`, chaletObject],
   [`woodlands`, woodlandsObject],
+  [`wood`, woodlandsObject],
   [`copse`, copseObject],
+  [`little`, copseObject],
+  [`little copse`, copseObject],
   [`nest`, nestObject],
+  [`cuckoo's`, nestObject],
+  [`cuckoo's nest`, nestObject],
+  [`the cuckoo's`, nestObject],
+  [`the cuckoo's nest`, nestObject],
+  [`the nest`, nestObject],
   [`cottage`, cottageObject],
+  [`corner`, cottageObject],
+  [`corner cottage`, cottageObject],
 ]);
 justTextGallery.addEventListener("click", function (e) {
   housesContainerSpans.forEach((el) => {
@@ -384,4 +402,44 @@ nav.addEventListener("click", function (e) {
   if (e.target.classList.contains("nav__el")) {
     storeName.scrollIntoView({ behavior: "smooth" });
   }
+});
+
+//search functionality
+
+//animation frames
+const errorAnimFrames = [
+  { transform: "translateX(8%)", border: "solid 1px red" },
+  { transform: "translateX(-8%)", border: "solid 1px red" },
+  { transform: "translateX(0%)", border: "solid 1px red" },
+];
+const errorAnimOptions = {
+  duration: 400,
+  easing: "ease-in-out",
+  iteration: 2,
+  direction: "alternate",
+};
+
+formInput.addEventListener("submit", function (e) {
+  e.preventDefault();
+  const inputValueLower = searchInput.value.toLowerCase();
+
+  if (objectsMap.has(inputValueLower)) {
+    const targetObject = objectsMap.get(inputValueLower);
+    changeToHouse(targetObject);
+    console.log(e);
+    removeMenus(searchMenu, "search");
+    searchInput.classList.remove("input-error");
+    inputSubmit.classList.remove("input-submit--show");
+    searchInput.classList.remove("input-container__input-box--searching");
+  } else {
+    searchInput.animate(errorAnimFrames, errorAnimOptions);
+    inputSubmit.classList.remove("input-submit--show");
+    searchInput.classList.remove("input-container__input-box--searching");
+  }
+  verifyPresenceOfClassesAndChangeHtmlScroll(searchMenu, "search-menu--show");
+});
+
+searchInput.addEventListener("click", function () {
+  this.classList.add("input-container__input-box--searching");
+  inputSubmit.classList.add("input-submit--show");
 });
