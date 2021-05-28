@@ -663,8 +663,16 @@ footer {
   flex-direction: column;
   gap: 40px;
   padding: 35px;
+<<<<<<< HEAD
   /* responsive mobile test */
   padding-bottom: 45vh;
+=======
+<<<<<<< HEAD
+  /* responsive mobile test */
+=======
+>>>>>>> 33cff3c27eadce389df7af306f947af11d4c5d0a
+  padding-bottom: 60vh;
+>>>>>>> 1844e35de7b545119256abd45fe4b0c69668e647
   transition: transform 0.6s ease-in-out;
 }
 .gallery__houses {
