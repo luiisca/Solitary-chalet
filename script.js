@@ -427,10 +427,12 @@ formInput.addEventListener("submit", function (e) {
     searchInput.classList.remove("input-error");
     inputSubmit.classList.remove("input-submit--show");
     searchInput.classList.remove("input-container__input-box--searching");
+    searchInput.value = "";
   } else {
     searchInput.animate(errorAnimFrames, errorAnimOptions);
     inputSubmit.classList.remove("input-submit--show");
     searchInput.classList.remove("input-container__input-box--searching");
+    searchInput.value = "";
   }
   verifyPresenceOfClassesAndChangeHtmlScroll(searchMenu, "search-menu--show");
 });
