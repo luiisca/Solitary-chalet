@@ -11,30 +11,35 @@
     <script defer src = script.js></script>
 </head>
 <body>
-    <div class="background"></div>
+    <img class='bodyBackImg lazyload' data-src="images/solitary-chalet.jpg" alt="">
     <section class="menu gallery-menu">
         <section class="gallery-houses-container">
-            <a class="gallery__houses gallery__houses--solitary-chalet" data-house= 'chalet'>
+            <a class="gallery__houses" data-house= 'chalet'>
+                <img class='gallery__img lazyload' data-src="images/solitary-chalet-tablet.jpg" alt="">
                 <article class="gallery__houses-description">
                     <h2>Solitary Chalet</h2>
                 </article>
             </a>
-            <a class="gallery__houses gallery__houses--corner-cottage" data-house= 'cottage'>
+            <a class="gallery__houses" data-house= 'cottage'>
+                <img class='gallery__img lazyload' data-src="images/cottage-tablet.jpg" alt="">
                 <article class="gallery__houses-description">
                     <h2>Corner Cottage</h2>
                 </article>
             </a>
-            <a class="gallery__houses gallery__houses--woodlands" data-house= 'woodlands'>
+            <a class="gallery__houses" data-house= 'woodlands'>
+                <img class='gallery__img lazyload' data-src="images/woodlands-tablet.jpg" alt="">
                 <article class="gallery__houses-description">
                     <h2>Woodlands</h2>
                 </article>
             </a>
-            <a class="gallery__houses gallery__houses--little-copse" data-house= 'copse'>
+            <a class="gallery__houses" data-house= 'copse'>
+                <img class='gallery__img lazyload' data-src="images/copse-tablet.jpg" alt="">
                 <article class="gallery__houses-description">
                     <h2>Little Copse</h2>
                 </article>
             </a>
-            <a class="gallery__houses gallery__houses--cuckoos-nest" data-house= 'nest'>
+            <a class="gallery__houses" data-house= 'nest'>
+                <img class='gallery__img lazyload' data-src="images/nest-tablet.jpg" alt="">
                 <article class="gallery__houses-description ">
                     <h2>Cuckoos Nest</h2>
                 </article>
@@ -99,6 +104,7 @@
             </div>
         </div>
     </footer>
+    <script src="lazysizes.min.js" async></script>
 </body>
 
 </html>

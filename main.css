@@ -67,7 +67,6 @@ body {
     "details-left details-left details-left"
     "details-right details-right details-right"
     "icons-left nav icons-right";
-  background-image: url(images/solitary-chalet.webp);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -537,6 +536,10 @@ footer {
   body .gallery-menu {
     overflow: hidden;
   }
+
+  .gallery__houses:hover {
+    transform: scale(1.1);
+  }
 }
 /* portrait */
 @media (min-width: 280px) and (orientation: portrait) {
@@ -552,7 +555,6 @@ footer {
   body {
     height: auto;
     grid-template-rows: 15vh 60vh 15vh 15vh 25vh;
-    background-image: url(images/solitary-chalet-mobile-320min.jpg);
   }
   .search-menu {
     transform: translateX(100vw);
@@ -584,7 +586,6 @@ footer {
 @media (min-width: 768px) and (orientation: portrait) {
   body {
     grid-template-rows: 15vh 60vh 30vh 5vh 25vh;
-    background-image: url(images/solitary-chalet-768min.jpg);
   }
   img {
     width: calc(2.5em + 0.3vw);
@@ -673,7 +674,6 @@ footer {
   height: 200px;
   display: flex;
   align-items: flex-end;
-  background-image: url(images/solitary-chalet-768min.jpg);
   border-radius: 10px;
   padding: 15px;
   text-align: center;
@@ -681,35 +681,23 @@ footer {
   font-size: calc(1em + 0.5vw);
 }
 
-.gallery__houses--solitary-chalet {
-  background-image: url(images/solitary-chalet.webp);
-  background-size: cover;
-}
-.gallery__houses--corner-cottage {
-  background-image: url(images/cottage.jpg);
-  background-size: cover;
-}
-.gallery__houses--woodlands {
-  background-image: url(images/woodlands.jpg);
-  background-size: cover;
-}
-.gallery__houses--little-copse {
-  background-image: url(images/copse.jpg);
-  background-size: cover;
-}
-.gallery__houses--cuckoos-nest {
-  background-image: url(images/nest.jpg);
-  background-size: cover;
-}
-.gallery__houses:hover {
-  transform: scale(1.1);
-}
-/* .gallery__houses:hover .gallery__houses-description {
-  position: relative;
+.gallery__img {
+  position: absolute;
   top: 0;
-} */
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
 .gallery__houses-description {
-  /* position: absolute; */
-  top: 100%;
-  transition: 0.4s ease;
+  z-index: 1;
+}
+
+.bodyBackImg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
