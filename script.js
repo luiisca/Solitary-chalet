@@ -124,7 +124,7 @@ const chaletObject = {
   elementClassName: ".solitary-chalet",
   houseInvTitle: "Chalet",
   houseTitle: "Solitary Chalet",
-  backgroundImage: "images/solitary-chalet.webp",
+  backgroundImage: "images/solitary-chalet.jpg",
   houseDesc:
     "Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti explicabo aliquam corrupti quae saepe ullam error vitae esse eum consequatur! Ad consequuntur provident sint voluptas magni sapiente, porro nostrum. Esse.",
   houseDet1:
