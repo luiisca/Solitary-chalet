@@ -42,11 +42,11 @@ const rightLogo = document.querySelector(".media-icons--right-side");
 const navContainer = document.querySelector(".navContainer");
 
 //change DOM
+const bodyBackImg = document.querySelector(".bodyBackImg");
 const invisibleTitle = document.querySelector(".product__invisible-text");
 const title = document.querySelector("h1");
 const housesContainer = document.querySelector(".centered-menu");
 const housesContainerSpans = housesContainer.querySelectorAll("span");
-console.log(housesContainerSpans[1]);
 const galleryHousesCont = document.querySelector(".gallery-houses-container");
 const chalet = document.querySelector(".solitary-chalet");
 const cottage = document.querySelector(".corner-cottage");
@@ -68,7 +68,7 @@ const cottageObject = {
   elementClassName: ".corner-cottage",
   houseInvTitle: "Cottage",
   houseTitle: "Corner Cottage",
-  backgroundImage: "url(images/cottage.jpg)",
+  backgroundImage: "images/cottage.jpg",
   houseDesc:
     "Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti explicabo aliquam corrupti quae saepe ullam error vitae esse eum consequatur! Ad consequuntur provident sint voluptas magni sapiente, porro nostrum. Esse.",
   houseDet1:
@@ -82,7 +82,7 @@ const woodlandsObject = {
   elementClassName: ".woodlands",
   houseInvTitle: "Woodlands",
   houseTitle: "Woodlands",
-  backgroundImage: "url(images/woodlands.jpg)",
+  backgroundImage: "images/woodlands.jpg",
   houseDesc:
     "Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti explicabo aliquam corrupti quae saepe ullam error vitae esse eum consequatur! Ad consequuntur provident sint voluptas magni sapiente, porro nostrum. Esse.",
   houseDet1:
@@ -96,7 +96,7 @@ const copseObject = {
   elementClassName: ".little-copse",
   houseInvTitle: "Copse",
   houseTitle: "Little Copse",
-  backgroundImage: "url(images/copse.jpg)",
+  backgroundImage: "images/copse.jpg",
   houseDesc:
     "Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti explicabo aliquam corrupti quae saepe ullam error vitae esse eum consequatur! Ad consequuntur provident sint voluptas magni sapiente, porro nostrum. Esse.",
   houseDet1:
@@ -110,7 +110,7 @@ const nestObject = {
   elementClassName: ".cuckoos-nest",
   houseInvTitle: "Nest",
   houseTitle: `Cuckoo’s Nest`,
-  backgroundImage: "url(images/nest.jpg)",
+  backgroundImage: "images/nest.jpg",
   houseDesc:
     "Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti explicabo aliquam corrupti quae saepe ullam error vitae esse eum consequatur! Ad consequuntur provident sint voluptas magni sapiente, porro nostrum. Esse.",
   houseDet1:
@@ -124,7 +124,7 @@ const chaletObject = {
   elementClassName: ".solitary-chalet",
   houseInvTitle: "Chalet",
   houseTitle: "Solitary Chalet",
-  backgroundImage: "url(images/solitary-chalet-mobile-320min.jpg)",
+  backgroundImage: "images/solitary-chalet.webp",
   houseDesc:
     "Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti explicabo aliquam corrupti quae saepe ullam error vitae esse eum consequatur! Ad consequuntur provident sint voluptas magni sapiente, porro nostrum. Esse.",
   houseDet1:
@@ -192,7 +192,8 @@ const changeToHouse = ({
   //convert into a template function which receives an object
   invisibleTitle.textContent = houseInvTitle;
   title.textContent = houseTitle;
-  document.body.style.backgroundImage = backgroundImage;
+  bodyBackImg.dataset.src = backgroundImage;
+  bodyBackImg.src = backgroundImage;
   houseDescription.textContent = houseDesc;
   houseDetail1.textContent = houseDet1;
   houseDetail2.textContent = houseDet2;
@@ -276,10 +277,8 @@ const centerGalHouses = function () {
   const scrollabeHeight = scrollHeight - clientHeight;
   let calcScrollPercentage = (scrollTop / scrollabeHeight) * 40;
   if (calcScrollPercentage <= 10 && mobLandscapeMediaQuery1300.matches) {
-    console.log(mobLandscapeMediaQuery1300.matches, "1300");
     galleryHousesCont.style.top = `9%`;
   } else if (calcScrollPercentage <= 10 && mobLandscapeMediaQuery.matches) {
-    console.log(mobLandscapeMediaQuery.matches, "768");
     galleryHousesCont.style.top = `7%`;
   } else if (mobLandscapteMediaQuery1024.matches) {
     calcScrollPercentage = (scrollTop / scrollabeHeight) * 20;
@@ -293,7 +292,6 @@ const verifyPresenceOfClasses = function (el, clas) {
   const removeClass = function () {
     if (el.classList.contains(clas)) {
       el.classList.remove(clas);
-      console.log("succed");
     }
   };
   removeClass();
@@ -310,7 +308,6 @@ const verifyPresenceOfClassesAndChangeHtmlScroll = function (el, clas) {
 
 //move gallery houses container programmatically
 mobLandscapeMediaQuery560.addEventListener("change", function (e) {
-  console.log(e);
   if (mobLandscapeMediaQuery.matches) {
     galleryHousesCont.style.top = `7%`;
   } else if (mobPortraitMediaQuery.matches) {
@@ -377,8 +374,9 @@ housesContainer.addEventListener("click", (e) => {
 });
 
 hiddenGallery.addEventListener("click", function (e) {
-  const targetObject = objectsMap.get(e.target.dataset.house);
-  if (e.target.classList.contains("gallery__houses")) {
+  const currentEl = e.target.closest(".gallery__houses");
+  const targetObject = objectsMap.get(currentEl.dataset.house);
+  if (currentEl.classList.contains("gallery__houses")) {
     changeToHouse(targetObject);
     removeGalleryFromInsideHouses(e);
   }
@@ -398,7 +396,6 @@ mobLandscapeMediaQuery.addEventListener("change", function (e) {
 
 nav.addEventListener("click", function (e) {
   e.preventDefault();
-  console.log(e.target.classList.contains("nav__el"));
   if (e.target.classList.contains("nav__el")) {
     storeName.scrollIntoView({ behavior: "smooth" });
   }
@@ -426,7 +423,6 @@ formInput.addEventListener("submit", function (e) {
   if (objectsMap.has(inputValueLower)) {
     const targetObject = objectsMap.get(inputValueLower);
     changeToHouse(targetObject);
-    console.log(e);
     removeMenus(searchMenu, "search");
     searchInput.classList.remove("input-error");
     inputSubmit.classList.remove("input-submit--show");
